@@ -1,0 +1,15 @@
+.background{
+    background: url("../images/stanislav-kondratiev-6pO3QFkk7hQ-unsplash.jpg") no-repeat center center;
+    background-size: cover;
+    height: 100vh;
+}
+
+.home-info {
+    padding: 130px 100px 100px 100px;
+    color: white;
+    font-size: large;
+}
+
+.home-info h1 {
+    font-size: 60px;
+}
