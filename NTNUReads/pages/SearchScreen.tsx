@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {StyleSheet, Text, View} from "react-native";
+import {StyleSheet, Text, View, Alert} from "react-native";
 
 import { StackScreenProps } from '@react-navigation/stack';
 import {SearchBar, Button} from "react-native-elements";
@@ -36,6 +36,27 @@ function SearchScreen({navigation}: Props) {
         setSearchText(searchText);
     };
 
+    const handleSearchSubmit = () => {
+
+        if (searchText !== "") {
+            navigation.navigate("Results", {
+                searchText: searchText
+            })
+        } else {
+            //alert("Vennligst fyll inn søketekst!");
+            Alert.alert(
+                "Mangler søketekst",
+                "Vennligst fyll inn søketekst!",
+                [
+                    { text: "OK", onPress: () => console.log("OK Pressed") }
+                ],
+                { cancelable: false }
+            );
+        }
+
+    };
+
+
     return (
         <View style={styles.container}>
 
@@ -53,9 +74,7 @@ function SearchScreen({navigation}: Props) {
             <View style={styles.searchButton}>
                 <Button
                     title="Søk"
-                    onPress={() => navigation.navigate("Results", {
-                        searchText: searchText
-                    })}
+                    onPress={handleSearchSubmit}
                 />
             </View>
         </View>
