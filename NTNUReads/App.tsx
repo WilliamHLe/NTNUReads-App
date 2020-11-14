@@ -1,6 +1,7 @@
 import React from 'react';
 import {Button, StyleSheet, Text, View} from 'react-native';
-import Sidebar from "./filter/Sidebar";
+import Sidebar from "./components/filter/Sidebar";
+import Sorting from "./components/Sorting";
 
 
 export default function App() {
@@ -13,6 +14,7 @@ export default function App() {
           accessibilityLabel="Learn more about this purple button"
       />
         <Sidebar />
+        <Sorting />
     </View>
   );
 }

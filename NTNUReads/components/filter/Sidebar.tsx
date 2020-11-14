@@ -9,6 +9,9 @@ const Sidebar = ({changeFilter}: SideBarProps) => {
     const [radio, setRadio] = useState<string>("")
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        /**
+         * TODO: Link to result component
+         */
         changeFilter(e.target.value)
     }
 
