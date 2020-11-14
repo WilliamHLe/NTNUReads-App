@@ -9,6 +9,7 @@ import SearchScreen from "../pages/SearchScreen";
 import ResultsScreen from "../pages/ResultsScreen";
 import { createStackNavigator } from '@react-navigation/stack';
 
+
 /*
 import { StackScreenProps } from '@react-navigation/stack';
 
@@ -31,6 +32,7 @@ const ProfileStack = createStackNavigator();
 const Tab = createMaterialBottomTabNavigator();
 
 function Navbar() {
+
     return (
         <Tab.Navigator
             initialRouteName="Home"
@@ -77,23 +79,13 @@ export default Navbar;
 
 const HomeStackScreen = () => (
     <HomeStack.Navigator>
-        <HomeStack.Screen name="Home" component={HomeScreen} options={{
-            title:'Home',
-            headerLeft: () => (
-                <MaterialCommunityIcons name="menu" size={25}/> //onPress={() => navigation.openDrawer()}
-            )
-        }} />
+        <HomeStack.Screen name="Home" component={HomeScreen} />
     </HomeStack.Navigator>
 );
 
 const SearchStackScreen = () => (
     <SearchStack.Navigator>
-        <SearchStack.Screen name="Search" component={SearchScreen} options={{
-            title:'Search',
-            headerLeft: () => (
-                <MaterialCommunityIcons name="menu" size={25}/> //onPress={() => navigation.openDrawer()}
-            )
-        }} />
+        <SearchStack.Screen name="Search" component={SearchScreen} />
         {/*Search screen should go to Results after click on search button, and to Details after clicking details button*/}
         <SearchStack.Screen name="Results" component={ResultsScreen} />
         <SearchStack.Screen name="Details" component={DetailsScreen} />
@@ -101,17 +93,18 @@ const SearchStackScreen = () => (
     </SearchStack.Navigator>
 );
 
+
 const ProfileStackScreen = () => (
-    <ProfileStack.Navigator>
-        <ProfileStack.Screen name="Profile" component={ProfileScreen} options={{
-            title:'Profile',
-            headerLeft: () => (
-                <MaterialCommunityIcons name="menu" size={25}/> //onPress={() => navigation.openDrawer()}
-            )
-        }} />
-        {/*Can go directly to details about favorites*/}
-        <SearchStack.Screen name="Details" component={DetailsScreen} />
-    </ProfileStack.Navigator>
+
+        //Should go directly to login if not logged in -> fix when login state is available
+        //<ProfileStack.Navigator initialRouteName={loggedIn ? "Profile" : "Login"}>
+        <ProfileStack.Navigator>
+            <ProfileStack.Screen name="Profile" component={ProfileScreen}/>
+            <ProfileStack.Screen name="Login" component={LoginScreen}/>
+            {/*Can go from list of favorites to details about favorites when clicking details button*/}
+            <SearchStack.Screen name="Details" component={DetailsScreen}/>
+        </ProfileStack.Navigator>
+
 );
 
 
