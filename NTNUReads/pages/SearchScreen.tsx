@@ -1,5 +1,13 @@
 import React from 'react';
-import {StyleSheet, Text, View} from "react-native";
+import {Button, StyleSheet, Text, View} from "react-native";
+
+import { StackScreenProps } from '@react-navigation/stack';
+
+type SearchParamList = {
+    Results: undefined;
+};
+
+type Props = StackScreenProps<SearchParamList, 'Results'>;
 
 
 const styles = StyleSheet.create({
@@ -11,10 +19,15 @@ const styles = StyleSheet.create({
 });
 
 
-function SearchScreen() {
+function SearchScreen({navigation}: Props) {
     return (
         <View style={styles.container}>
+
             <Text>Search Screen</Text>
+            <Button
+                title="Go to ResultsScreen"
+                onPress={() => navigation.navigate("Results")}
+            />
         </View>
     );
 }

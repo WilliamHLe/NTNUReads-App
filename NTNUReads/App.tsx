@@ -6,6 +6,10 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Navbar from "./components/Navbar";
 import HomeScreen from "./pages/HomeScreen";
 import DetailsScreen from "./pages/DetailsScreen";
+import SearchScreen from "./pages/SearchScreen";
+import ResultsScreen from "./pages/ResultsScreen";
+import LoginScreen from "./pages/LoginScreen";
+import ProfileScreen from "./pages/ProfileScreen";
 
 /*
 import { StackScreenProps } from '@react-navigation/stack';
@@ -51,11 +55,18 @@ export default function App() {
         <Text>Dette funker</Text>
       </View>
 
+
         <Stack.Navigator initialRouteName="HomeScreen">
             <Stack.Screen name="HomeScreen" component={HomeScreen} />
             <Stack.Screen name="DetailsScreen" component={DetailsScreen} />
+            <Stack.Screen name="SearchScreen" component={SearchScreen} />
+            <Stack.Screen name="ResultsScreen" component={ResultsScreen} />
+            <Stack.Screen name="LoginScreen" component={LoginScreen} />
+            <Stack.Screen name="ProfileScreen" component={ProfileScreen} />
         </Stack.Navigator>
+
         */}
+
         <Navbar/>
     </NavigationContainer>
   );
