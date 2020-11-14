@@ -2,6 +2,7 @@ import React from 'react';
 import {Button, StyleSheet, Text, View} from 'react-native';
 import Sidebar from "./components/filter/Sidebar";
 import Sorting from "./components/Sorting";
+import Page from "./components/Page";
 
 
 export default function App() {
@@ -15,6 +16,7 @@ export default function App() {
       />
         <Sidebar />
         <Sorting />
+        <Page />
     </View>
   );
 }

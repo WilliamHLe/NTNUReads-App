@@ -36,7 +36,6 @@ const Sidebar = ({changeFilter}: SideBarProps) => {
             <Button
                 onPress={reset}
                 title="Nullstill"
-                accessibilityLabel="Learn more about this purple button"
             />
         </View>
     );
