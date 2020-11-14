@@ -9,22 +9,6 @@ import SearchScreen from "../pages/SearchScreen";
 import ResultsScreen from "../pages/ResultsScreen";
 import { createStackNavigator } from '@react-navigation/stack';
 
-
-/*
-import { StackScreenProps } from '@react-navigation/stack';
-
-type RootStackParamList = {
-    HomeScreen: undefined;
-    SearchScreen: undefined;
-    ProfileScreen: undefined;
-};
-
-type HomeProps = StackScreenProps<RootStackParamList, 'HomeScreen'>;
-type SearchProps = StackScreenProps<RootStackParamList, 'SearchScreen'>;
-type ProfileProps = StackScreenProps<RootStackParamList, 'ProfileScreen'>;
-
- */
-
 const HomeStack = createStackNavigator();
 const SearchStack = createStackNavigator();
 const ProfileStack = createStackNavigator();
@@ -95,7 +79,6 @@ const SearchStackScreen = () => (
 
 
 const ProfileStackScreen = () => (
-
         //Should go directly to login if not logged in -> fix when login state is available
         //<ProfileStack.Navigator initialRouteName={loggedIn ? "Profile" : "Login"}>
         <ProfileStack.Navigator>
