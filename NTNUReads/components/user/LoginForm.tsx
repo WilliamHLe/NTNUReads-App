@@ -1,6 +1,6 @@
 import React, {useState} from "react";
-import {View} from 'react-native'
-import {Input,CheckBox,Button,} from 'react-native-elements'
+import {StyleSheet, View} from 'react-native'
+import {Input, CheckBox, Button, Text,} from 'react-native-elements'
 import url from "../../url"
 import {saveUser} from "../../asyncStorage"
 import {NavigationProp, useNavigation} from "@react-navigation/native";
@@ -9,6 +9,23 @@ import {NavigationProp, useNavigation} from "@react-navigation/native";
 type LoginParamList = {
     Profile: undefined;
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        padding: 20,
+        paddingTop: 40,
+        justifyContent: 'center',
+    },
+    checkbox: {
+        backgroundColor: "transparent",
+    },
+    button: {
+        paddingTop: 30,
+        width: "90%",
+        alignSelf: "center"
+    }
+});
 
 const LoginForm = () => {
 
@@ -53,6 +70,7 @@ const LoginForm = () => {
                         alert("ERROR: ikke gyldig bruker");
                     }
                     //If a user is found, log in and redirect to the profile page (put it at top of navigation stack)
+                    //NOTE: Logging out is done by button in Profile
                     else {
                         saveUser(result[0])
                         //alert("Du har logget inn!");
@@ -67,16 +85,16 @@ const LoginForm = () => {
 
     }
     return (
-        <View>
+        <View style={styles.container}>
             <View>
                 <Input placeholder="Brukernavn" onChangeText={(username)=>setUsername(username)}/>
                 <Input placeholder="Passord" secureTextEntry={true} onChangeText={(password)=>setPassword(password)} />
-                <CheckBox
+                <CheckBox containerStyle={styles.checkbox}
                     title='Jeg er informert om at denne innloggingen er totalt usikker og kun til demonstrasjon.'
                     checked={securityCheck}
                     onPress={() => setSecurityCheck(!securityCheck)}
                 />
-                <Button title="Logg inn" onPress={() => onFormSubmit()}/>
+                <Button title="Logg inn" style={styles.button} onPress={() => onFormSubmit()}/>
             </View>
         </View>
     )

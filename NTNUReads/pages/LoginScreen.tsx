@@ -16,7 +16,6 @@ function LoginScreen() {
 
     return (
         <View style={styles.container}>
-            <Text>Logg inn</Text>
             <LoginForm/>
         </View>
     );
