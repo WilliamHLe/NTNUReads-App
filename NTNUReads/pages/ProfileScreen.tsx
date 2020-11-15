@@ -2,13 +2,16 @@ import React from 'react';
 import {Button, StyleSheet, Text, View} from "react-native";
 
 import { StackScreenProps } from '@react-navigation/stack';
-import LoginForm from "../components/user/LoginForm";
+import {getUser, removeUser} from "../asyncStorage";
+import {NavigationProp, useNavigation} from "@react-navigation/native";
 
 type ProfileParamList = {
-    Detaljer: undefined;
+    Details: undefined;
+    Login: undefined;
 };
 
-type Props = StackScreenProps<ProfileParamList, 'Detaljer'>;
+
+//type ProfileProps = StackScreenProps<ProfileParamList, 'Details'>;
 
 const styles = StyleSheet.create({
     container: {
@@ -19,14 +22,36 @@ const styles = StyleSheet.create({
 });
 
 
-function ProfileScreen({navigation}: Props) {
+function ProfileScreen() {
+
+    const navDetails = useNavigation<NavigationProp<ProfileParamList, 'Details'>>();
+    const navLogin = useNavigation<NavigationProp<ProfileParamList, 'Login'>>();
+
+    const handleLogOut = () => {
+        getUser().then(res => {
+            if(res != null) {
+                removeUser()
+                console.log(res)
+                //alert("Du har logget ut!");
+            }
+        })
+        navLogin.reset({
+            index: 0,
+            routes: [{ name: 'Login' }],
+        });
+    }
+
     return (
         <View style={styles.container}>
             <Text>Profile Screen</Text>
-            <LoginForm/>
+            {/*<LoginForm/>*/}
+            <Button
+                title="Logg ut"
+                onPress={handleLogOut}
+            />
             <Button
                 title="Go to DetailsScreen"
-                onPress={() => navigation.navigate("Detaljer")}
+                onPress={() => navDetails.navigate("Details")}
             />
         </View>
     );

@@ -1,5 +1,6 @@
 import React from 'react';
 import {StyleSheet, Text, View} from "react-native";
+import LoginForm from "../components/user/LoginForm";
 
 
 const styles = StyleSheet.create({
@@ -12,9 +13,11 @@ const styles = StyleSheet.create({
 
 
 function LoginScreen() {
+
     return (
         <View style={styles.container}>
-            <Text>Login Screen</Text>
+            <Text>Logg inn</Text>
+            <LoginForm/>
         </View>
     );
 }

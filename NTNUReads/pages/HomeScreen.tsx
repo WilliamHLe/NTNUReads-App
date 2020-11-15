@@ -2,15 +2,12 @@ import React from 'react';
 import {StyleSheet, View, ImageBackground} from "react-native";
 import {Text, Button} from "react-native-elements";
 
-import { StackScreenProps } from '@react-navigation/stack';
+import {NavigationProp, useNavigation} from "@react-navigation/native";
 
 
 type HomeParamList = {
-    Resultater: {searchText: string};
+    Results: {searchText: string};
 };
-
-type Props = StackScreenProps<HomeParamList, "Resultater">;
-
 
 
 const styles = StyleSheet.create({
@@ -33,7 +30,10 @@ const styles = StyleSheet.create({
 });
 
 
-function HomeScreen({navigation}: Props) {
+function HomeScreen() {
+
+    const navResults = useNavigation<NavigationProp<HomeParamList, 'Results'>>();
+
     return (
         <View style={styles.container}>
             <ImageBackground source={require("../images/stanislav-kondratiev-6pO3QFkk7hQ-unsplash.jpg")} style={styles.backgroundImage}>
@@ -45,7 +45,7 @@ function HomeScreen({navigation}: Props) {
                         style={{paddingTop:30}}
                         title="Ta meg videre til alle bøker"
                         //endre searchText her til noe som kan hente ut alle bøker fra databasen
-                        onPress={() => navigation.navigate("Resultater", {searchText: "all"})}
+                        onPress={() => navResults.navigate("Results", {searchText: "all"})}
                     />
                 </View>
             </ImageBackground>

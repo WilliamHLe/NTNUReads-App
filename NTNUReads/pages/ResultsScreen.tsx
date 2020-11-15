@@ -1,19 +1,16 @@
 import React from "react";
 import {Button, StyleSheet, Text, View} from "react-native";
-import { useRoute } from '@react-navigation/native';
+import {NavigationProp, useNavigation, useRoute} from '@react-navigation/native';
 import { RouteProp } from '@react-navigation/native';
 
 import { StackScreenProps } from '@react-navigation/stack';
 
 type ResultsParamList = {
-    Detaljer: undefined;
+    Details: undefined;
+    Results: {searchText: string};
+
 };
 
-type SearchParamList = {
-    Resultater: {searchText: string};
-};
-
-type Props = StackScreenProps<ResultsParamList, 'Detaljer'>;
 
 
 const styles = StyleSheet.create({
@@ -24,17 +21,19 @@ const styles = StyleSheet.create({
     },
 });
 
-function ResultsScreen({navigation}: Props) {
+function ResultsScreen() {
+
+    const navDetails = useNavigation<NavigationProp<ResultsParamList, 'Details'>>();
 
     //route is used to access search word which is sent as parameter
-    const route = useRoute<RouteProp<SearchParamList, 'Resultater'>>();
+    const route = useRoute<RouteProp<ResultsParamList, 'Results'>>();
 
     return (
         <View style={styles.container}>
             <Text>Dette er resultatet fra søket: {route.params.searchText}</Text>
             <Button
                 title="Go to DetailsScreen"
-                onPress={() => navigation.navigate("Detaljer")}
+                onPress={() => navDetails.navigate("Details")}
             />
         </View>
     );

@@ -2,15 +2,13 @@ import React, {useState} from 'react';
 import {StyleSheet, View, Alert} from "react-native";
 import { Text } from 'react-native-elements';
 
-import { StackScreenProps } from '@react-navigation/stack';
 import {SearchBar, Button} from "react-native-elements";
+import {NavigationProp, useNavigation} from "@react-navigation/native";
 
 
 type SearchParamList = {
-    Resultater: {searchText: string};
+    Results: {searchText: string};
 };
-
-type Props = StackScreenProps<SearchParamList, "Resultater">;
 
 
 const styles = StyleSheet.create({
@@ -42,7 +40,9 @@ const styles = StyleSheet.create({
 });
 
 
-function SearchScreen({navigation}: Props) {
+function SearchScreen() {
+
+    const navResults = useNavigation<NavigationProp<SearchParamList, 'Results'>>();
 
     const [searchText, setSearchText] = useState<string>("")
 
@@ -53,7 +53,7 @@ function SearchScreen({navigation}: Props) {
     const handleSearchSubmit = () => {
 
         if (searchText !== "") {
-            navigation.navigate("Resultater", {
+            navResults.navigate("Results", {
                 searchText: searchText
             })
         } else {
@@ -95,37 +95,37 @@ function SearchScreen({navigation}: Props) {
                 <View style={styles.popularSearchesButton}>
                     <Button
                         title="Harry Potter"
-                        onPress={() => navigation.navigate("Resultater", {searchText: "Harry Potter"})}
+                        onPress={() => navResults.navigate("Results", {searchText: "Harry Potter"})}
                     />
                 </View>
                 <View style={styles.popularSearchesButton}>
                     <Button
                         title="J.R.R. Tolkien"
-                        onPress={() => navigation.navigate("Resultater", {searchText: "J.R.R. Tolkien"})}
+                        onPress={() => navResults.navigate("Results", {searchText: "J.R.R. Tolkien"})}
                     />
                 </View>
                 <View style={styles.popularSearchesButton}>
                     <Button
                         title="Agatha Christie"
-                        onPress={() => navigation.navigate("Resultater", {searchText: "Agatha Christie"})}
+                        onPress={() => navResults.navigate("Results", {searchText: "Agatha Christie"})}
                     />
                 </View>
                 <View style={styles.popularSearchesButton}>
                     <Button
                         title="Oscar Wilde"
-                        onPress={() => navigation.navigate("Resultater", {searchText: "Oscar Wilde"})}
+                        onPress={() => navResults.navigate("Results", {searchText: "Oscar Wilde"})}
                     />
                 </View>
                 <View style={styles.popularSearchesButton}>
                     <Button
                         title="Shakespeare"
-                        onPress={() => navigation.navigate("Resultater", {searchText: "Shakespeare"})}
+                        onPress={() => navResults.navigate("Results", {searchText: "Shakespeare"})}
                     />
                 </View>
                 <View style={styles.popularSearchesButton}>
                     <Button
                         title="Jane Austen"
-                        onPress={() => navigation.navigate("Resultater", {searchText: "Jane Austen"})}
+                        onPress={() => navResults.navigate("Results", {searchText: "Jane Austen"})}
                     />
                 </View>
             </View>

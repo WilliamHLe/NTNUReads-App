@@ -1,39 +1,24 @@
 import React, {useState} from "react";
-import {
-    View,
-    TextInput,
-    Text,
-    StyleSheet,
-    ViewStyle,
-    TextStyle,
-    TextInputProps,
-    Alert,
-} from 'react-native'
+import {View} from 'react-native'
 import {Input,CheckBox,Button,} from 'react-native-elements'
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import url from "../../url"
-import {saveUser,getUser,removeUser} from "../../asyncStorage"
-//import {useHistory} from "react-router-dom";
+import {saveUser} from "../../asyncStorage"
+import {NavigationProp, useNavigation} from "@react-navigation/native";
 //import {useSelector} from "react-redux";
 
+type LoginParamList = {
+    Profile: undefined;
+}
+
 const LoginForm = () => {
+
+    const navigation = useNavigation<NavigationProp<LoginParamList, 'Profile'>>();
+
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
     const [securityCheck, setSecurityCheck] = useState(false);
-    //const history = useHistory();
 
     // const theme = useSelector((state:AppState) => state.themeReducer.theme)
-
-    //If the user is already logged in, log out and redirect to the home page
-    getUser().then(res => {
-        if(res != null) {
-            removeUser()
-            console.log(res)
-            alert("Du har logget ut!");
-            //setLoggedIn(false);
-            //history.push("/");
-        }
-    })
 
 
     const onFormSubmit = () => {
@@ -67,44 +52,20 @@ const LoginForm = () => {
                     if (JSON.stringify(result[0]) === undefined) {
                         alert("ERROR: ikke gyldig bruker");
                     }
-                    //If a user is found, log in and redirect to the home page
+                    //If a user is found, log in and redirect to the profile page (put it at top of navigation stack)
                     else {
                         saveUser(result[0])
-                        alert("Du har logget inn!");
-                        //sessionStorage.setItem("user",JSON.stringify(result[0]));
-                        //setLoggedIn(true);
-                        //history.push("/");
+                        //alert("Du har logget inn!");
+                        navigation.reset({
+                            index: 0,
+                            routes: [{ name: 'Profile' }],
+                        });
+
                     }
                 }
             );
 
     }
-    /* <div className={"page-wrapper-"+theme}>
-
-            <Form onSubmit={onFormSubmit}>
-                <Form.Group controlId="formBasicUsername">
-                    <Form.Label>Brukernavn</Form.Label>
-                    <Form.Control type="username" placeholder="Brukernavn" onChange={(e)=>setUsername(e.target.value)}/>
-                    <Form.Text className="text-muted">
-                        Tips: willi1 er et fint brukernavn
-                    </Form.Text>
-                </Form.Group>
-                <Form.Group controlId="formBasicPassword">
-                    <Form.Label>Passord</Form.Label>
-                    <Form.Control type="password" placeholder="Passord" onChange={(e)=>setPassword(e.target.value)}/>
-                    <Form.Text className="text-muted">
-                        Tips: willi123 er et fint passord
-                    </Form.Text>
-                </Form.Group>
-                <Form.Group controlId="formBasicCheckbox">
-                    <Form.Check type="checkbox" label="Jeg er informert om at denne innloggingen er totalt usikker og kun til demonstrasjon." onChange={() => setSecurityCheck(!securityCheck)}/>
-                </Form.Group>
-                <Button variant="primary" type="submit">
-                    Logg inn
-                </Button>
-            </Form>
-
-        </div> */
     return (
         <View>
             <View>
