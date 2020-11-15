@@ -19,35 +19,35 @@ function Navbar() {
 
     return (
         <Tab.Navigator
-            initialRouteName="Home"
+            initialRouteName="Hjem"
             //activeColor="#e91e63"
             //style={{ backgroundColor: 'tomato' }}
         >
             <Tab.Screen
-                name="Home"
+                name="Hjem"
                 component={HomeStackScreen}
                 options={{
-                    tabBarLabel: 'Home',
+                    tabBarLabel: 'Hjem',
                     tabBarIcon: ({ color }) => (
                         <MaterialCommunityIcons name="home" color={color} size={26} />
                     ),
                 }}
             />
             <Tab.Screen
-                name="Login"
+                name="Søk"
                 component={SearchStackScreen}
                 options={{
-                    tabBarLabel: 'Search',
+                    tabBarLabel: 'Søk',
                     tabBarIcon: ({ color }) => (
                         <MaterialCommunityIcons name="book-search" color={color} size={26} />
                     ),
                 }}
             />
             <Tab.Screen
-                name="Profile"
+                name="Profil"
                 component={ProfileStackScreen}
                 options={{
-                    tabBarLabel: 'Profile',
+                    tabBarLabel: 'Profil',
                     tabBarIcon: ({ color }) => (
                         <MaterialCommunityIcons name="account" color={color} size={26} />
                     ),
@@ -63,16 +63,19 @@ export default Navbar;
 
 const HomeStackScreen = () => (
     <HomeStack.Navigator>
-        <HomeStack.Screen name="Home" component={HomeScreen} />
+        <HomeStack.Screen name="Hjem" component={HomeScreen} />
+        {/*Can search for all books (entire dataset) from HomeScreen (?)*/}
+        <HomeStack.Screen name="Resultater" component={ResultsScreen} />
+        <HomeStack.Screen name="Detaljer" component={DetailsScreen} />
     </HomeStack.Navigator>
 );
 
 const SearchStackScreen = () => (
     <SearchStack.Navigator>
-        <SearchStack.Screen name="Search" component={SearchScreen} />
+        <SearchStack.Screen name="Søk" component={SearchScreen} />
         {/*Search screen should go to Results after click on search button, and to Details after clicking details button*/}
-        <SearchStack.Screen name="Results" component={ResultsScreen} />
-        <SearchStack.Screen name="Details" component={DetailsScreen} />
+        <SearchStack.Screen name="Resultater" component={ResultsScreen} />
+        <SearchStack.Screen name="Detaljer" component={DetailsScreen} />
 
     </SearchStack.Navigator>
 );
@@ -82,10 +85,10 @@ const ProfileStackScreen = () => (
         //Should go directly to login if not logged in -> fix when login state is available
         //<ProfileStack.Navigator initialRouteName={loggedIn ? "Profile" : "Login"}>
         <ProfileStack.Navigator>
-            <ProfileStack.Screen name="Profile" component={ProfileScreen}/>
-            <ProfileStack.Screen name="Login" component={LoginScreen}/>
+            <ProfileStack.Screen name="Profil" component={ProfileScreen}/>
+            <ProfileStack.Screen name="Logg inn" component={LoginScreen}/>
             {/*Can go from list of favorites to details about favorites when clicking details button*/}
-            <SearchStack.Screen name="Details" component={DetailsScreen}/>
+            <ProfileStack.Screen name="Detaljer" component={DetailsScreen}/>
         </ProfileStack.Navigator>
 
 );

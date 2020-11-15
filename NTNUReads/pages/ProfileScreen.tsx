@@ -4,10 +4,10 @@ import {Button, StyleSheet, Text, View} from "react-native";
 import { StackScreenProps } from '@react-navigation/stack';
 
 type ProfileParamList = {
-    Details: undefined;
+    Detaljer: undefined;
 };
 
-type Props = StackScreenProps<ProfileParamList, 'Details'>;
+type Props = StackScreenProps<ProfileParamList, 'Detaljer'>;
 
 const styles = StyleSheet.create({
     container: {
@@ -24,7 +24,7 @@ function ProfileScreen({navigation}: Props) {
             <Text>Profile Screen</Text>
             <Button
                 title="Go to DetailsScreen"
-                onPress={() => navigation.navigate("Details")}
+                onPress={() => navigation.navigate("Detaljer")}
             />
         </View>
     );
