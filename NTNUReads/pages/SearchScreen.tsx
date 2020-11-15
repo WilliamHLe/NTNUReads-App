@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
-import {StyleSheet, Text, View, Alert} from "react-native";
+import {StyleSheet, View, Alert} from "react-native";
+import { Text } from 'react-native-elements';
 
 import { StackScreenProps } from '@react-navigation/stack';
 import {SearchBar, Button} from "react-native-elements";
@@ -23,7 +24,20 @@ const styles = StyleSheet.create({
         paddingTop: 10
     },
     searchButton: {
-        padding: 10
+        padding: 10,
+    },
+    popularSearchesContainer: {
+        flexWrap: 'wrap',
+        alignItems: 'flex-start',
+        flexDirection:'row',
+        justifyContent: 'space-around',
+        padding: 10,
+
+    },
+    popularSearchesButton: {
+        maxWidth: "50%",
+        padding: 5
+
     }
 });
 
@@ -43,7 +57,6 @@ function SearchScreen({navigation}: Props) {
                 searchText: searchText
             })
         } else {
-            //alert("Vennligst fyll inn søketekst!");
             Alert.alert(
                 "Mangler søketekst",
                 "Vennligst fyll inn søketekst!",
@@ -60,7 +73,7 @@ function SearchScreen({navigation}: Props) {
     return (
         <View style={styles.container}>
 
-            <Text>Søk etter din favorittbok:</Text>
+            <Text h4>Søk etter din favorittbok:</Text>
 
             <View style={styles.searchBar}>
                 <SearchBar
@@ -76,6 +89,45 @@ function SearchScreen({navigation}: Props) {
                     title="Søk"
                     onPress={handleSearchSubmit}
                 />
+            </View>
+            <Text h4 style={{textAlign:"center", paddingBottom:10, paddingTop:50}}>Populære søk</Text>
+            <View style={styles.popularSearchesContainer}>
+                <View style={styles.popularSearchesButton}>
+                    <Button
+                        title="Harry Potter"
+                        onPress={() => navigation.navigate("Results", {searchText: "Harry Potter"})}
+                    />
+                </View>
+                <View style={styles.popularSearchesButton}>
+                    <Button
+                        title="J.R.R. Tolkien"
+                        onPress={() => navigation.navigate("Results", {searchText: "J.R.R. Tolkien"})}
+                    />
+                </View>
+                <View style={styles.popularSearchesButton}>
+                    <Button
+                        title="Agatha Christie"
+                        onPress={() => navigation.navigate("Results", {searchText: "Agatha Christie"})}
+                    />
+                </View>
+                <View style={styles.popularSearchesButton}>
+                    <Button
+                        title="Oscar Wilde"
+                        onPress={() => navigation.navigate("Results", {searchText: "Oscar Wilde"})}
+                    />
+                </View>
+                <View style={styles.popularSearchesButton}>
+                    <Button
+                        title="Shakespeare"
+                        onPress={() => navigation.navigate("Results", {searchText: "Shakespeare"})}
+                    />
+                </View>
+                <View style={styles.popularSearchesButton}>
+                    <Button
+                        title="Jane Austen"
+                        onPress={() => navigation.navigate("Results", {searchText: "Jane Austen"})}
+                    />
+                </View>
             </View>
         </View>
     );
