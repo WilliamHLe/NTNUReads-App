@@ -2,7 +2,8 @@ import React, {useState} from 'react';
 import {StyleSheet, View, Alert} from "react-native";
 import { Text } from 'react-native-elements';
 
-import {SearchBar, Button} from "react-native-elements";
+//import {SearchBar, Button} from "react-native-elements";
+import {Searchbar, Button} from "react-native-paper";
 import {StackScreenProps} from "@react-navigation/stack";
 
 
@@ -78,19 +79,18 @@ function SearchScreen({navigation}: SearchProps) {
             <Text h4>Søk etter din favorittbok:</Text>
 
             <View style={styles.searchBar}>
-                <SearchBar
+                <Searchbar
                     placeholder="Tittel, forfatter eller ISBN"
-                    platform={"ios"}    //searchbar design is weird if we don't use a platform
-                    containerStyle={{width: "100%", backgroundColor:"transparent"}}
+                    //platform={"ios"}    //searchbar design is weird if we don't use a platform
+                    //containerStyle={{width: "100%", backgroundColor:"transparent"}}
                     onChangeText={updateSearch}
                     value={searchText}
                 />
             </View>
             <View style={styles.searchButton}>
-                <Button
-                    title="Søk"
-                    onPress={handleSearchSubmit}
-                />
+                <Button onPress={handleSearchSubmit} mode={"contained"}>
+                    Søk
+                </Button>
             </View>
             <Text h4 style={{textAlign:"center", paddingBottom:10, paddingTop:50}}>Populære søk</Text>
             <View style={styles.popularSearchesContainer}>

@@ -1,6 +1,7 @@
-import {StyleSheet, Text, View} from "react-native";
+import {StyleSheet, View} from "react-native";
 import React from "react";
 import {RouteProp, useRoute} from "@react-navigation/native";
+import {Text} from "react-native-paper";
 
 type DetailsParamList = {
     Details: {id: number};

@@ -16,6 +16,7 @@ import {
 } from 'react-native-paper';
 import merge from 'deepmerge';
 
+//merge together default and dark themes of both react-native-paper and react-navigation
 const CombinedDefaultTheme = merge(PaperDefaultTheme, NavigationDefaultTheme);
 const CombinedDarkTheme = merge(PaperDarkTheme, NavigationDarkTheme);
 
