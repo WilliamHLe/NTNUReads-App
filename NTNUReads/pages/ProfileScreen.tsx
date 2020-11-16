@@ -6,7 +6,7 @@ import {getUser, removeUser} from "../asyncStorage";
 import {NavigationProp, useNavigation} from "@react-navigation/native";
 
 type ProfileParamList = {
-    Details: undefined;
+    Details: {id: number};
     Login: undefined;
 };
 
@@ -44,14 +44,14 @@ function ProfileScreen() {
     return (
         <View style={styles.container}>
             <Text>Profile Screen</Text>
-            {/*<LoginForm/>*/}
             <Button
                 title="Logg ut"
                 onPress={handleLogOut}
             />
+            {/*Placeholder button with placeholder ISBN - should have same table as results here - only with favorites*/}
             <Button
                 title="Go to DetailsScreen"
-                onPress={() => navDetails.navigate("Details")}
+                onPress={() => navDetails.navigate("Details", {id: 1111111111})}
             />
         </View>
     );
