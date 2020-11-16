@@ -5,6 +5,7 @@ import { StackScreenProps } from '@react-navigation/stack';
 import {getUser, removeUser} from "../asyncStorage";
 import {NavigationProp, useNavigation} from "@react-navigation/native";
 import {DataTable} from "react-native-paper";
+import url from "../url";
 
 type ProfileParamList = {
     Details: {id: number};
@@ -38,7 +39,7 @@ function ProfileScreen({navigation}: ProfileProps) {
         getUser().then(res => {
             if(res != null) {
                 const us = JSON.parse(res)
-                fetch("http://localhost:4000/favorite/user/"+us._id+"")
+                fetch("http://"+url+":4000/favorite/user/"+us._id+"")
                 .then(response => response.json())
                 .then((data) => {
                 //console.log(data.books);
@@ -77,7 +78,7 @@ function ProfileScreen({navigation}: ProfileProps) {
                 </DataTable.Header>
 
                 {searchResult.map(item =>
-                    <DataTable.Row>
+                    <DataTable.Row onPress={() => navigation.push("Details", {id: item._id})} key={item.isbn}>
                         <DataTable.Title>{item.isbn}</DataTable.Title>
                         <DataTable.Title>{item.authors}</DataTable.Title>
                         <DataTable.Title>{item.title}</DataTable.Title>

@@ -1,6 +1,7 @@
 import {StyleSheet, Text, View} from "react-native";
 import React from "react";
 import {RouteProp, useRoute} from "@react-navigation/native";
+import Detailed from "./Detailed";
 
 type DetailsParamList = {
     Details: {id: number};
@@ -26,6 +27,7 @@ function DetailsScreen() {
     return (
         <View style={styles.container}>
             <Text>Denne boken har ISBN: {id}</Text>
+            <Detailed book={id} />
         </View>
     );
 }
