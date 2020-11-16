@@ -7,6 +7,7 @@ import {DataTable} from "react-native-paper";
 import url from "../url";
 
 import { StackScreenProps } from '@react-navigation/stack';
+import Page from "../components/Page";
 
 type ResultsParamList = {
     Details: {id: number};
@@ -55,6 +56,20 @@ function ResultsScreen({navigation}: ResultsProps) {
 
     //console.log(searchResult)
 
+    // Pagination
+    const [countRes, setCountRes] = useState(0)
+    const handlePagination = (ct:number) => {
+        setCount(ct)
+    }
+    useEffect(()=>{
+        fetch(`http://localhost:4000/books/search/${search}/${filter}`)
+            .then(response => response.json())
+            .then((data) => {
+                setCountRes(data)
+            })
+
+    }, [filter, countRes, search])
+
     return (
         <View style={styles.container}>
             <Text style={{fontSize:16}}>Dette er resultatet fra søket: {search}</Text>
@@ -86,15 +101,9 @@ function ResultsScreen({navigation}: ResultsProps) {
 
                 {/*This is temporary, only frontend, must include working pagination here*/}
                 {/*See https://callstack.github.io/react-native-paper/data-table-pagination.html*/}
-                <DataTable.Pagination
-                    page={1}
-                    numberOfPages={3}
-                    onPageChange={page => {
-                        console.log(page);
-                    }}
-                    label="1-2 of 6"
-                />
+
             </DataTable>
+            <Page style={{paddingTop:10, marginTop:20}} change={handlePagination} countRes={countRes} />
         </View>
     );
 }

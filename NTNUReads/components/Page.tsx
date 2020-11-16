@@ -1,5 +1,6 @@
 import {Button} from "react-native";
 import React, {useEffect, useState} from "react";
+import { DataTable } from "react-native-paper";
 
 
 const Page = (props:any) => {
@@ -11,35 +12,29 @@ const Page = (props:any) => {
         setCountRes(props.countRes)
     }, [setCountRes, props.countRes])
 
-    const prevPage = () => {
-        if (pagination > 1) {
-            setPagination(pagination - 1)
+
+    const changePage = (page:any) => {
+        if (pagination > 1 && page < pagination) {
+            setPagination(page)
             setCount(count - 10)
             props.change(count-10)
         }
-    }
-
-    const nextPage = () => {
-        if ((countRes/10) >= pagination ) {
-            setPagination(pagination + 1)
+        if ((countRes/10) >= pagination && page > pagination) {
+            setPagination(page)
             setCount(count + 10)
             props.change(count+10)
         }
     }
 
     return(
-        <view>
-            <Button
-                onPress={prevPage}
-                title="<"
-            />
-            <Button
-                onPress={nextPage}
-                title=">"
-            />
-            <text>Viser: {countRes} resultater</text>
-            <text>Side: {pagination} av {Math.floor(countRes/10 + 1)}</text>
-        </view>
+        <DataTable.Pagination
+            page={pagination}
+            numberOfPages={Math.floor(countRes/10 + 2)}
+            onPageChange={page => {
+                changePage(page)
+            }}
+            label={`Side ${pagination} av ${Math.floor(countRes/10 + 1)}`}
+        />
     )
 }
 
