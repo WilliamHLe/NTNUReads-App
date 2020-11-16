@@ -10,7 +10,6 @@ const bookRoute = require('../backend/routes/book.routes')
 const favoriteRoute = require('../backend/routes/favorite.routes')
 const reviewRoute = require('../backend/routes/review.routes')
 
-
 // Connecting mongoDB Database
 mongoose.Promise = global.Promise;
 mongoose.connect(dbConfig.db, {
