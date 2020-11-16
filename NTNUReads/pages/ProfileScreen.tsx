@@ -11,7 +11,7 @@ type ProfileParamList = {
 };
 
 
-//type ProfileProps = StackScreenProps<ProfileParamList, 'Details'>;
+type ProfileProps = StackScreenProps<ProfileParamList, 'Details'>;
 
 const styles = StyleSheet.create({
     container: {
@@ -22,9 +22,9 @@ const styles = StyleSheet.create({
 });
 
 
-function ProfileScreen() {
+function ProfileScreen({navigation}: ProfileProps) {
 
-    const navDetails = useNavigation<NavigationProp<ProfileParamList, 'Details'>>();
+    //const navDetails = useNavigation<NavigationProp<ProfileParamList, 'Details'>>();
     const navLogin = useNavigation<NavigationProp<ProfileParamList, 'Login'>>();
 
     const handleLogOut = () => {
@@ -51,7 +51,7 @@ function ProfileScreen() {
             {/*Placeholder button with placeholder ISBN - should have same table as results here - only with favorites*/}
             <Button
                 title="Go to DetailsScreen"
-                onPress={() => navDetails.navigate("Details", {id: 1111111111})}
+                onPress={() => navigation.push("Details", {id: 1111111111})}
             />
         </View>
     );
