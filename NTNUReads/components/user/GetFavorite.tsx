@@ -7,8 +7,11 @@ import {
     TextInputProps,
     Alert,
 } from 'react-native'
-import {Input, CheckBox, Button,} from 'react-native-elements'
+import {Input, CheckBox,} from 'react-native-elements'
+import {Button} from "react-native-paper"
 import React, {useEffect, useState} from "react";
+import {getUser} from "../../asyncStorage";
+import url from "../../url";
 
 const GetFavorite = (props:any) => {
     const book = props.book;
@@ -16,79 +19,91 @@ const GetFavorite = (props:any) => {
 
     //Checks the database if the user has the book marked as favorite
     useEffect(()=>{
-        const user = JSON.parse(sessionStorage.getItem("user") || "");
-        fetch("http://localhost:4000/favorite/find/"+user._id+"/"+book+"")
-            .then(response => response.json())
-            .then((data) => {
-                console.log(data);
-                setResult(data)
-            })
+        getUser().then(res => {
+            if (res != null) {
+                const us = JSON.parse(res)
+                fetch("http://"+url+":4000/favorite/find/" + us._id + "/" + book + "")
+                    .then(response => response.json())
+                    .then((data) => {
+                        console.log(data);
+                        setResult(data)
+                    })
+            }
+        })
     },[book])
 
     //Adds the book to favorite after pressing the button
-    const handleAddFavoriteSubmit = (event:any) => {
-        event.preventDefault()
-        const user = JSON.parse(sessionStorage.getItem("user") || "");
-        fetch('http://localhost:4000/favorite/add', {
-            method: "put",
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
+    const handleAddFavoriteSubmit = () => {
 
-            body: JSON.stringify({
-                user: user._id,
-                book: book
-            })
+        getUser().then(res => {
+            if (res != null) {
+                const us = JSON.parse(res)
+                fetch('http://'+url+':4000/favorite/add', {
+                    method: "put",
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+
+                    body: JSON.stringify({
+                        user: us._id,
+                        book: book
+                    })
+                })
+                    .then(response => response.json())
+                    .then((data) => {
+                        setResult(data)
+                    })
+                    .then((response) => {
+                        console.log(Result)
+                        alert("Favoritt lagt til!")
+                    });
+            }
         })
-            .then(response => response.json())
-            .then((data) => {
-                setResult(data)
-            })
-            .then( (response) => {
-                console.log(Result)
-                alert("Favoritt lagt til!")
-            });
     }
 
     //Removes the book as favorite after pressing the button
-    const handleRemoveFavoriteSubmit = (event:any) => {
-        event.preventDefault()
-        const user = JSON.parse(sessionStorage.getItem("user") || "");
-        fetch('http://localhost:4000/favorite/remove', {
-            method: "put",
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
+    const handleRemoveFavoriteSubmit = () => {
 
-            body: JSON.stringify({
-                user: user._id,
-                book: book
-            })
+        getUser().then(res => {
+            if (res != null) {
+                const us = JSON.parse(res)
+                fetch('http://'+url+':4000/favorite/remove', {
+                    method: "put",
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+
+                    body: JSON.stringify({
+                        user: us._id,
+                        book: book
+                    })
+                })
+                    .then(response => response.json())
+                    .then((data) => {
+                        setResult(data)
+                    })
+                    .then((response) => {
+                        console.log(Result)
+                        alert("Favoritt fjernet!")
+                    });
+            }
         })
-            .then(response => response.json())
-            .then((data) => {
-                setResult(data)
-            })
-            .then( (response) => {
-                console.log(Result)
-                alert("Favoritt fjernet!")
-            });
     }
 
     // If the user has the book marked as favorite, show button to remove it
     if(Result != null) {
         return (
             <View>
-                <Button title="Fjern favoritt" onPress={() => handleRemoveFavoriteSubmit}/>
+                <Button mode="contained" onPress={() => handleRemoveFavoriteSubmit()}>Fjern favoritt</Button>
             </View>
         )
         // If not, show button to add it as favorite
     } else {
         return (
             <View>
-                <Button title="Legg til favoritt" onPress={() => handleAddFavoriteSubmit} />
+                <Button mode="contained" onPress={() => handleAddFavoriteSubmit()}>Legg til favoritt</Button>
             </View>
         )
     }

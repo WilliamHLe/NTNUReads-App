@@ -9,7 +9,8 @@ import {
     TextInputProps,
     Alert,
 } from 'react-native'
-import {Input,CheckBox,Button,Text,ListItem} from 'react-native-elements'
+import { Headline, Divider, List } from 'react-native-paper';
+import {Input,CheckBox,Button,Text} from 'react-native-elements'
 //import {useParams} from "react-router-dom";
 //import {ListGroup} from "react-bootstrap";
 //import AddFavorite from "../components/user/AddFavorite"
@@ -20,10 +21,10 @@ import {saveUser,getUser,removeUser} from "../asyncStorage"
 import AddFavorite from "../components/user/AddFavorite";
 import url from "../url"
 
-const Detailed = () => {
+const Detailed = (props:any) => {
 
    // const { id } = useParams()
-    const id  = "5f805fdf55a95a83a001a5b4"
+    const id  = props.book;
     const [book, setBook] = useState<any[]>([])
     const [review, setReview] = useState<any[]>([])
 
@@ -92,18 +93,18 @@ const Detailed = () => {
         <View>
             {book.map(item =>
                 <View>
-                    <Text h1>{item.title}</Text>
-                    <ListItem bottomDivider>
-                        <ListItem.Content>
-                            <ListItem.Title><b>Forfatter:</b> {item.authors}</ListItem.Title>
-                            <ListItem.Title><b>ISBN/ISBN13:</b> {item.isbn} / {item.isbn13}</ListItem.Title>
-                            <ListItem.Title><b>Utgivelsesdato:</b> {item.publication_date.substring(0,10)}</ListItem.Title>
-                            <ListItem.Title><b>Utgiver:</b> {item.publisher}</ListItem.Title>
-                            <ListItem.Title><b>Språk:</b> {item.language_code}</ListItem.Title>
-                            <ListItem.Title><b>Vurdering:</b> {item.average_rating} av 5 ({item.ratings_count} vurderinger totalt)</ListItem.Title>
-                        </ListItem.Content>
-                    </ListItem>
-                    <AddFavorite book={id} />
+                    <Headline>{item.title}</Headline>
+                            <List.Item title={"Forfatter: " + item.authors}></List.Item>
+                            <Divider />
+                            <List.Item title={'ISBN/ISBN13: ' + item.isbn + "/" + item.isbn13}></List.Item>
+                            <Divider />
+                            <List.Item title={'Utgivelsesdato: ' + item.publication_date.substring(0,10)}></List.Item>
+                            <Divider />
+                            <List.Item title={'Utgiver: ' + item.publisher}></List.Item>
+                            <Divider />
+                            <List.Item title={'Språk: ' + item.language_code}></List.Item>
+                            <Divider />
+                    <AddFavorite book={item._id}/>
                 </View>
             )}
         </View>

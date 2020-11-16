@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {
     View,
     TextInput,
@@ -9,20 +9,21 @@ import {
     Alert,
 } from 'react-native'
 import GetFavorite from "./GetFavorite"
+import {getUser} from "../../asyncStorage";
 
 const AddFavorite = (props:any) => {
     const book = props.book;
-
+    const [isLoggedIn,setStatus] = useState<any>(false)
     //Checks if the user is logged in, and displays button to add or remove the book as favorite
-    if(sessionStorage.getItem("user")) {
+    getUser().then(res => {
+        if (res != null) {
+            setStatus(true)
+        }
+    })
+    if (isLoggedIn) {
         return <GetFavorite book={book} />
-        //If not, don't display anything
     } else {
-        return (
-            <View>
-
-            </View>
-        )
+        return <View></View>
     }
 }
 
