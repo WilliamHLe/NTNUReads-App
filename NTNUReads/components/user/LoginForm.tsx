@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {StyleSheet, View} from 'react-native'
+import {Alert, StyleSheet, View} from 'react-native'
 import {Input, CheckBox, Button, Text,} from 'react-native-elements'
 import url from "../../url"
 import {saveUser} from "../../asyncStorage"
@@ -29,6 +29,7 @@ const styles = StyleSheet.create({
 
 const LoginForm = () => {
 
+    //not a screen component, use useNavigation hook to access navigation prop
     const navigation = useNavigation<NavigationProp<LoginParamList, 'Profile'>>();
 
     const [username, setUsername] = useState("")
@@ -43,13 +44,27 @@ const LoginForm = () => {
 
         //Checks if the user has entered a username and password
         if(username === "" || password === "") {
-            alert("Vennligst fyll inn brukernavn og passord")
+            Alert.alert(
+                "Mangler info",
+                "Vennligst fyll inn brukernavn og passord.",
+                [
+                    { text: "OK", onPress: () => console.log("OK Pressed") }
+                ],
+                { cancelable: false }
+            );
             return
         }
 
         //Checks if the user has checked the security box
         if(!securityCheck) {
-            alert("Vennligst bekreft at du er informert om usikker innlogging")
+            Alert.alert(
+                "Mangler bekreftelse",
+                "Vennligst bekreft at du er informert om usikker innlogging.",
+                [
+                    { text: "OK", onPress: () => console.log("OK Pressed") }
+                ],
+                { cancelable: false }
+            );
             return
         }
 
@@ -67,7 +82,14 @@ const LoginForm = () => {
                     console.log(JSON.stringify(result[0]));
                     //If no user if found, alert the user and don't log in
                     if (JSON.stringify(result[0]) === undefined) {
-                        alert("ERROR: ikke gyldig bruker");
+                        Alert.alert(
+                            "ERROR",
+                            "Ikke gyldig bruker!",
+                            [
+                                { text: "OK", onPress: () => console.log("OK Pressed") }
+                            ],
+                            { cancelable: false }
+                        );
                     }
                     //If a user is found, log in and redirect to the profile page (put it at top of navigation stack)
                     //NOTE: Logging out is done by button in Profile

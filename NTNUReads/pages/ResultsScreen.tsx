@@ -9,12 +9,12 @@ import url from "../url";
 import { StackScreenProps } from '@react-navigation/stack';
 
 type ResultsParamList = {
-    Details: undefined;
+    Details: {id: number};
     Results: {searchText: string};
 
 };
 
-
+type ResultsProps = StackScreenProps<ResultsParamList, 'Details'>;
 
 const styles = StyleSheet.create({
     container: {
@@ -26,9 +26,9 @@ const styles = StyleSheet.create({
     },
 });
 
-function ResultsScreen() {
+function ResultsScreen({navigation}: ResultsProps) {
 
-    const navDetails = useNavigation<NavigationProp<ResultsParamList, 'Details'>>();
+    //const navDetails = useNavigation<NavigationProp<ResultsParamList, 'Details'>>();
 
     //route is used to access search word which is sent as parameter
     const route = useRoute<RouteProp<ResultsParamList, 'Results'>>();
@@ -74,7 +74,9 @@ function ResultsScreen() {
                 </DataTable.Header>
 
                 {searchResult.map(item =>
-                    <DataTable.Row onPress={() => navDetails.navigate("Details")}>
+                    //navigation.push pushes a _new_ route to the stack with param isbn ID
+                    //will be removed from stack when going back, makes it easy to have own route with specific id for all books
+                    <DataTable.Row onPress={() => navigation.push("Details", {id: item.isbn})}>
                         <DataTable.Title>{item.isbn}</DataTable.Title>
                         <DataTable.Title>{item.authors}</DataTable.Title>
                         <DataTable.Title>{item.title}</DataTable.Title>

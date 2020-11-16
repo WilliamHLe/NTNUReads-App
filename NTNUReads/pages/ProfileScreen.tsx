@@ -7,7 +7,7 @@ import {NavigationProp, useNavigation} from "@react-navigation/native";
 import {DataTable} from "react-native-paper";
 
 type ProfileParamList = {
-    Details: undefined;
+    Details: {id: number};
     Login: undefined;
 };
 
@@ -77,7 +77,7 @@ function ProfileScreen() {
                 </DataTable.Header>
 
                 {searchResult.map(item =>
-                    <DataTable.Row onPress={() => navDetails.navigate("Details")}>
+                    <DataTable.Row>
                         <DataTable.Title>{item.isbn}</DataTable.Title>
                         <DataTable.Title>{item.authors}</DataTable.Title>
                         <DataTable.Title>{item.title}</DataTable.Title>
@@ -90,9 +90,10 @@ function ProfileScreen() {
                 title="Logg ut"
                 onPress={handleLogOut}
             />
+            {/*Placeholder button with placeholder ISBN - should have same table as results here - only with favorites*/}
             <Button
                 title="Go to DetailsScreen"
-                onPress={() => navDetails.navigate("Details")}
+                onPress={() => navDetails.navigate("Details", {id: 1111111111})}
             />
         </View>
     );
