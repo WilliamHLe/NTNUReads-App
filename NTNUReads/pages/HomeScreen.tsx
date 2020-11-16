@@ -4,6 +4,7 @@ import {Text, Button} from "react-native-elements";
 
 import {NavigationProp, useNavigation} from "@react-navigation/native";
 import {StackScreenProps} from "@react-navigation/stack";
+import ThemeSwitch from "../components/theme/ThemeSwitch";
 
 
 type HomeParamList = {
@@ -26,8 +27,12 @@ const styles = StyleSheet.create({
         flex: 1,
         textAlign: 'center',
         padding: "10%",
-        paddingTop: "45%",
+        paddingTop: "35%",
 
+    },
+    themeSwitch: {
+        paddingTop: 20,
+        alignItems: 'center'
     }
 });
 
@@ -49,6 +54,9 @@ function HomeScreen({navigation}: HomeProps) {
                         //endre searchText her til noe som kan hente ut alle bøker fra databasen
                         onPress={() => navigation.navigate("Results", {searchText: "all"})}
                     />
+                    <View style={styles.themeSwitch}>
+                        <ThemeSwitch/>
+                    </View>
                 </View>
             </ImageBackground>
         </View>
