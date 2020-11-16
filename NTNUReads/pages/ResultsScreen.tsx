@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
 import {StyleSheet, View} from "react-native";
-import {NavigationProp, useNavigation, useRoute} from '@react-navigation/native';
+import { useRoute } from '@react-navigation/native';
 import {Text} from "react-native-elements";
 import { RouteProp } from '@react-navigation/native';
 import {DataTable} from "react-native-paper";
@@ -76,29 +76,13 @@ function ResultsScreen({navigation}: ResultsProps) {
                 {searchResult.map(item =>
                     //navigation.push pushes a _new_ route to the stack with param isbn ID
                     //will be removed from stack when going back, makes it easy to have own route with specific id for all books
-                    <DataTable.Row onPress={() => navigation.push("Details", {id: item.isbn})}>
+                    <DataTable.Row onPress={() => navigation.push("Details", {id: item.isbn})} key={item.isbn}>
                         <DataTable.Title>{item.isbn}</DataTable.Title>
                         <DataTable.Title>{item.authors}</DataTable.Title>
                         <DataTable.Title>{item.title}</DataTable.Title>
                         <DataTable.Title numeric>{item.average_rating}</DataTable.Title>
                     </DataTable.Row>
                 )}
-
-                {/*
-                <DataTable.Row onPress={() => navDetails.navigate("Details")}>
-                    <DataTable.Cell>2839128937</DataTable.Cell>
-                    <DataTable.Cell>J.K. Rowling</DataTable.Cell>
-                    <DataTable.Cell>Harry Potter</DataTable.Cell>
-                    <DataTable.Cell>4.8</DataTable.Cell>
-                </DataTable.Row>
-
-                <DataTable.Row>
-                    <DataTable.Cell>8397128824</DataTable.Cell>
-                    <DataTable.Cell>J.R.R. Tolkien</DataTable.Cell>
-                    <DataTable.Cell>The Hobbit</DataTable.Cell>
-                    <DataTable.Cell>3.5</DataTable.Cell>
-                </DataTable.Row>
-                */}
 
                 {/*This is temporary, only frontend, must include working pagination here*/}
                 {/*See https://callstack.github.io/react-native-paper/data-table-pagination.html*/}

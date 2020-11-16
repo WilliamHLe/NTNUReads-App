@@ -3,7 +3,6 @@ import {StyleSheet, View, Alert} from "react-native";
 import { Text } from 'react-native-elements';
 
 import {SearchBar, Button} from "react-native-elements";
-import {NavigationProp, useNavigation} from "@react-navigation/native";
 import {StackScreenProps} from "@react-navigation/stack";
 
 
