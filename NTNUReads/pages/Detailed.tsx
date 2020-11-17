@@ -69,7 +69,7 @@ const Detailed = (props:any) => {
         <SafeAreaView style={styles.container}>
             <ScrollView style={styles.scrollView}>
             {book.map(item =>
-                <View>
+                <View key={item._id}>
                     <Headline>{item.title}</Headline>
                             <List.Item title={"Forfatter: " + item.authors}/>
                             <Divider />

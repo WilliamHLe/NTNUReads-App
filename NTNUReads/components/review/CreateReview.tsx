@@ -56,11 +56,15 @@ const CreateReview = (props:any) => {
 
     // Fetches the reviews for the book
     useEffect(()=>{
+        let mounted = true
         fetch(`http://${url}:4000/review/${book}`)
             .then(response => response.json())
             .then((data) => {
-                setReviews(data)
+                if (mounted) setReviews(data)
             })
+        return () => {
+            mounted = false;
+        };
     },[reviews])
 
     const onFormSubmit = () => {
