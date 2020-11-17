@@ -30,7 +30,7 @@ const FilterRating = ({changeFilter}: SideBarProps) => {
     }
     return (
         <View style={{marginRight: 15}}>
-            <Paragraph style={{textAlign: "center"}}>Filterer rating:</Paragraph>
+            <Paragraph style={{textAlign: "center"}}>Filtrer rating:</Paragraph>
             <AirbnbRating
                 count={5}
                 showRating={false}

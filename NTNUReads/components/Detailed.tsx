@@ -16,9 +16,9 @@ import {Input,CheckBox,Text,Overlay} from 'react-native-elements'
 //import AddFavorite from "../components/user/AddFavorite"
 //import {useSelector} from "react-redux";
 //import {AppState} from "../store/rootStore";
-import CreateReview from "../components/review/CreateReview";
+import CreateReview from "./review/CreateReview";
 import {saveUser,getUser,removeUser} from "../asyncStorage"
-import AddFavorite from "../components/user/AddFavorite";
+import AddFavorite from "./user/AddFavorite";
 import url from "../url"
 //import CreateReview from "../../src/components/review/CreateReview";
 

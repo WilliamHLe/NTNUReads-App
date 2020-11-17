@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
     },
     themeSwitch: {
         paddingTop: 20,
-        alignItems: 'center'
+        alignItems: 'center',
     }
 });
 

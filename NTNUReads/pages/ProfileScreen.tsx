@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react';
-import {Button, SafeAreaView, ScrollView, StyleSheet, Text} from "react-native";
+import {SafeAreaView, ScrollView, StyleSheet} from "react-native";
 
 import { StackScreenProps } from '@react-navigation/stack';
 import {getUser, removeUser} from "../asyncStorage";
 import {NavigationProp, useNavigation} from "@react-navigation/native";
-import {DataTable, Title} from "react-native-paper";
+import {DataTable, Title, Button} from "react-native-paper";
 import Constants from "expo-constants";
 import url from "../url";
 
@@ -97,16 +97,11 @@ function ProfileScreen({navigation}: ProfileProps) {
                         </DataTable.Row>
                     )}
                 </DataTable>
-                {/*<LoginForm/>*/}
                 <Button
-                    title="Logg ut"
+                    mode={"contained"}
                     onPress={handleLogOut}
-                />
-                {/*Placeholder button with placeholder ISBN - should have same table as results here - only with favorites*/}
-                <Button
-                    title="Go to DetailsScreen"
-                    onPress={() => navigation.push("Details", {id: 1111111111})}
-                />
+                >Logg ut
+                </Button>
             </ScrollView>
         </SafeAreaView>
     );

@@ -1,7 +1,7 @@
 import {StyleSheet, View} from "react-native";
 import React from "react";
 import {RouteProp, useRoute} from "@react-navigation/native";
-import Detailed from "./Detailed";
+import Detailed from "../components/Detailed";
 import {Text} from "react-native-paper";
 
 type DetailsParamList = {
@@ -11,8 +11,10 @@ type DetailsParamList = {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
+        padding: 20,
+        paddingTop: 40,
+        //alignItems: 'center',
+        //justifyContent: 'center',
     },
 });
 
@@ -27,7 +29,7 @@ function DetailsScreen() {
 
     return (
         <View style={styles.container}>
-            <Text>Denne boken har ISBN: {id}</Text>
+            {/*<Text>Denne boken har ISBN: {id}</Text>*/}
             <Detailed book={id} />
         </View>
     );

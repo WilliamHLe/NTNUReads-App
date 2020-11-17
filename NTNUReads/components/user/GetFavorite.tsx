@@ -25,7 +25,7 @@ const GetFavorite = (props:any) => {
                 fetch("http://"+url+":4000/favorite/find/" + us._id + "/" + book + "")
                     .then(response => response.json())
                     .then((data) => {
-                        console.log(data);
+                        //console.log(data);
                         setResult(data)
                     })
             }
@@ -55,7 +55,7 @@ const GetFavorite = (props:any) => {
                         setResult(data)
                     })
                     .then((response) => {
-                        console.log(Result)
+                        //console.log(Result)
                         alert("Favoritt lagt til!")
                     });
             }
@@ -85,7 +85,7 @@ const GetFavorite = (props:any) => {
                         setResult(data)
                     })
                     .then((response) => {
-                        console.log(Result)
+                        //console.log(Result)
                         alert("Favoritt fjernet!")
                     });
             }

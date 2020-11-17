@@ -93,10 +93,10 @@ const ProfileStackScreen = () => {
 
     return (
         //Should go directly to login if not logged in -> fix when login state is available
-        <ProfileStack.Navigator initialRouteName={"Login"}>
+        <ProfileStack.Navigator>
             {/*<ProfileStack.Navigator>*/}
-            <ProfileStack.Screen name="Profile" component={ProfileScreen} options={{title: 'Profil'}}/>
             <ProfileStack.Screen name="Login" component={LoginScreen} options={{title: 'Logg inn'}}/>
+            <ProfileStack.Screen name="Profile" component={ProfileScreen} options={{title: 'Profil'}}/>
             {/*Can go from list of favorites to details about favorites when clicking details button*/}
             <ProfileStack.Screen name="Details" component={DetailsScreen} options={{title: 'Detaljer'}}/>
         </ProfileStack.Navigator>

@@ -3,7 +3,7 @@ import {Alert, StyleSheet, View} from 'react-native'
 //import {Input, CheckBox, Button, Text,} from 'react-native-elements'
 import {TextInput, Checkbox, Button, Text} from "react-native-paper";
 import url from "../../url"
-import {saveUser} from "../../asyncStorage"
+import {getUser, removeUser, saveUser} from "../../asyncStorage"
 import {NavigationProp, useNavigation} from "@react-navigation/native";
 //import {useSelector} from "react-redux";
 
@@ -42,6 +42,17 @@ const LoginForm = () => {
     const [securityCheck, setSecurityCheck] = useState(false);
 
     // const theme = useSelector((state:AppState) => state.themeReducer.theme)
+
+    //send user directly to profile if already logged in
+    getUser().then(res => {
+        if(res != null) {
+            navigation.reset({
+                index: 0,
+                routes: [{ name: 'Profile' }],
+            });
+        }
+    })
+
 
 
     const onFormSubmit = () => {
