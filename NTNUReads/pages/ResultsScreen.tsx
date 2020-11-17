@@ -8,6 +8,7 @@ import url from "../url";
 import Constants from 'expo-constants';
 
 import { StackScreenProps } from '@react-navigation/stack';
+import {getUser, removeUser} from "../asyncStorage";
 
 type ResultsParamList = {
     Details: {id: number};
@@ -84,7 +85,7 @@ function ResultsScreen({navigation}: ResultsProps) {
                     {searchResult.map(item =>
                         //navigation.push pushes a _new_ route to the stack with param isbn ID
                         //will be removed from stack when going back, makes it easy to have own route with specific id for all books
-                        <DataTable.Row onPress={() => navigation.push("Details", {id: item.isbn})} key={item.isbn}>
+                        <DataTable.Row onPress={() => navigation.push("Details", {id: item._id})} key={item._id}>
                             <DataTable.Title>{item.isbn}</DataTable.Title>
                             <DataTable.Title>{item.authors}</DataTable.Title>
                             <DataTable.Title>{item.title}</DataTable.Title>
