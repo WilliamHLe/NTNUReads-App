@@ -29,8 +29,8 @@ const FilterRating = ({changeFilter}: SideBarProps) => {
         setDefaultrating(e)
     }
     return (
-        <View>
-            <Text>Filter:</Text>
+        <View style={{marginRight: 15}}>
+            <Text style={{textAlign: "center"}}>Filterer rating:</Text>
             <AirbnbRating
                 count={5}
                 showRating={false}
@@ -38,7 +38,7 @@ const FilterRating = ({changeFilter}: SideBarProps) => {
                 size={18}
                 onFinishRating={changeRadio}
             />
-            <Button mode="contained" contentStyle={{height: 30}} onPress={reset}>
+            <Button mode="contained" compact={true} onPress={reset}>
                 Nullstill
             </Button>
         </View>
