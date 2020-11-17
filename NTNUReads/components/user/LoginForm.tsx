@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import {Alert, StyleSheet, View} from 'react-native'
-import {Input, CheckBox, Button, Text,} from 'react-native-elements'
+//import {Input, CheckBox, Button, Text,} from 'react-native-elements'
+import {TextInput, Checkbox, Button, Text} from "react-native-paper";
 import url from "../../url"
 import {saveUser} from "../../asyncStorage"
 import {NavigationProp, useNavigation} from "@react-navigation/native";
@@ -17,11 +18,15 @@ const styles = StyleSheet.create({
         paddingTop: 40,
         justifyContent: 'center',
     },
-    checkbox: {
-        backgroundColor: "transparent",
+    checkboxContainer: {
+        flexWrap: 'wrap',
+        alignItems: 'flex-start',
+        flexDirection:'row',
+        justifyContent: 'space-around',
+        paddingTop: 20,
+        paddingBottom: 20
     },
     button: {
-        paddingTop: 30,
         width: "90%",
         alignSelf: "center"
     }
@@ -108,18 +113,22 @@ const LoginForm = () => {
     }
     return (
         <View style={styles.container}>
+
             <View>
-                <Input placeholder="Brukernavn" onChangeText={(username)=>setUsername(username)}/>
-                <Input placeholder="Passord" secureTextEntry={true} onChangeText={(password)=>setPassword(password)} />
-                <CheckBox containerStyle={styles.checkbox}
-                    title='Jeg er informert om at denne innloggingen er totalt usikker og kun til demonstrasjon.'
-                    checked={securityCheck}
-                    onPress={() => setSecurityCheck(!securityCheck)}
-                />
-                <Button title="Logg inn" style={styles.button} onPress={() => onFormSubmit()}/>
+                <TextInput label={"Brukernavn"} placeholder="Brukernavn" value={username} autoCapitalize = 'none' onChangeText={(username)=>setUsername(username)}/>
+                <TextInput label={"Passord"} placeholder="Passord" value={password} secureTextEntry={true} onChangeText={(password)=>setPassword(password)} />
+                <View style={styles.checkboxContainer}>
+                    <Checkbox.Android
+                        status={securityCheck ? 'checked' : 'unchecked'}
+                        onPress={() => setSecurityCheck(!securityCheck)}
+                    />
+                    <Text>Jeg er informert om at denne innloggingen er totalt usikker og kun til demonstrasjon</Text>
+                </View>
+
+                <Button style={styles.button} mode={"contained"} onPress={() => onFormSubmit()}>Logg inn</Button>
             </View>
         </View>
     )
 }
 
-export default LoginForm
+export default LoginForm;
