@@ -1,9 +1,6 @@
 import React, {useState} from 'react';
 import {StyleSheet, View, Alert} from "react-native";
-import { Text } from 'react-native-elements';
-
-//import {SearchBar, Button} from "react-native-elements";
-import {Searchbar, Button} from "react-native-paper";
+import {Searchbar, Button, Subheading} from "react-native-paper";
 import {StackScreenProps} from "@react-navigation/stack";
 
 
@@ -76,7 +73,7 @@ function SearchScreen({navigation}: SearchProps) {
     return (
         <View style={styles.container}>
 
-            <Text h4>Søk etter din favorittbok:</Text>
+            <Subheading>Søk etter din favorittbok:</Subheading>
 
             <View style={styles.searchBar}>
                 <Searchbar
@@ -92,43 +89,49 @@ function SearchScreen({navigation}: SearchProps) {
                     Søk
                 </Button>
             </View>
-            <Text h4 style={{textAlign:"center", paddingBottom:10, paddingTop:50}}>Populære søk</Text>
+            <Subheading style={{textAlign:"center", paddingBottom:10, paddingTop:50}}>Populære søk</Subheading>
             <View style={styles.popularSearchesContainer}>
                 <View style={styles.popularSearchesButton}>
                     <Button
-                        title="Harry Potter"
                         onPress={() => navigation.navigate("Results", {searchText: "Harry Potter"})}
-                    />
+                        mode={"contained"}
+                        compact={true}
+                    >Harry Potter</Button>
                 </View>
                 <View style={styles.popularSearchesButton}>
                     <Button
-                        title="J.R.R. Tolkien"
                         onPress={() => navigation.navigate("Results", {searchText: "J.R.R. Tolkien"})}
-                    />
+                        mode={"contained"}
+                        compact={true}
+                    >J.R.R. Tolkien</Button>
                 </View>
                 <View style={styles.popularSearchesButton}>
                     <Button
-                        title="Agatha Christie"
                         onPress={() => navigation.navigate("Results", {searchText: "Agatha Christie"})}
-                    />
+                        mode={"contained"}
+                        compact={true}
+                    >Agatha Christie</Button>
                 </View>
                 <View style={styles.popularSearchesButton}>
                     <Button
-                        title="Oscar Wilde"
                         onPress={() => navigation.navigate("Results", {searchText: "Oscar Wilde"})}
-                    />
+                        mode={"contained"}
+                        compact={true}
+                    >Oscar Wilde</Button>
                 </View>
                 <View style={styles.popularSearchesButton}>
                     <Button
-                        title="Shakespeare"
                         onPress={() => navigation.navigate("Results", {searchText: "Shakespeare"})}
-                    />
+                        mode={"contained"}
+                        compact={true}
+                    >Shakespeare</Button>
                 </View>
                 <View style={styles.popularSearchesButton}>
                     <Button
-                        title="Jane Austen"
                         onPress={() => navigation.navigate("Results", {searchText: "Jane Austen"})}
-                    />
+                        mode={"contained"}
+                        compact={true}
+                    >Jane Austen</Button>
                 </View>
             </View>
         </View>

@@ -77,7 +77,7 @@ function ProfileScreen({navigation}: ProfileProps) {
                 </DataTable.Header>
 
                 {searchResult.map(item =>
-                    <DataTable.Row>
+                    <DataTable.Row onPress={() => navigation.push("Details", {id: item.isbn})} key={item.isbn}>
                         <DataTable.Title>{item.isbn}</DataTable.Title>
                         <DataTable.Title>{item.authors}</DataTable.Title>
                         <DataTable.Title>{item.title}</DataTable.Title>
