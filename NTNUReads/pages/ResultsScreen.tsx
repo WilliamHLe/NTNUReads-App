@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
         alignItems: 'flex-start',
         flexDirection:'row',
         textAlign: "center",
-    }
+    },
     scrollView: {
         marginHorizontal: 10,
     }
