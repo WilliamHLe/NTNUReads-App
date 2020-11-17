@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from "react";
-import {ScrollView, SafeAreaView, StyleSheet, View} from "react-native";
+import {ScrollView, SafeAreaView, StyleSheet, View, Text} from "react-native";
 import { useRoute } from '@react-navigation/native';
-//import {Text} from "react-native-elements";
 import { RouteProp } from '@react-navigation/native';
 import {DataTable, Subheading, Paragraph} from "react-native-paper";
 import url from "../url";
@@ -9,7 +8,6 @@ import Constants from 'expo-constants';
 
 import { StackScreenProps } from '@react-navigation/stack';
 import Page from "../components/Page";
-import ShowModal from "../components/ShowModal";
 import Sorting from "../components/Sorting";
 import FilterRating from "../components/filter/FilterRating";
 import {getUser, removeUser} from "../asyncStorage";
@@ -30,8 +28,8 @@ const styles = StyleSheet.create({
         //justifyContent: 'space-between',
         //paddingTop: 40,
         //padding: 10,
-        margin: 20,
-        marginTop: Constants.statusBarHeight,
+        //margin: 20,
+        //marginTop: Constants.statusBarHeight,
     },
     alignment: {
         flexWrap: 'wrap',
@@ -41,11 +39,13 @@ const styles = StyleSheet.create({
         alignContent: "center",
         alignSelf: "center",
         textAlignVertical: "center",
+        marginVertical: 20
     },
     scrollView: {
-        marginHorizontal: 10,
+        marginHorizontal: 0,
     }
 });
+
 
 function ResultsScreen({navigation}: ResultsProps) {
 
@@ -74,12 +74,19 @@ function ResultsScreen({navigation}: ResultsProps) {
 
     }, [search, count, sortBy, filter])
 
-    //console.log(searchResult)
 
     // Pagination
     const [countRes, setCountRes] = useState(0)
     const handlePagination = (ct:number) => {
         setCount(ct)
+    }
+
+    const handleSort = (ct:string) => {
+        setSortBy(ct)
+    }
+
+    const handleFilter = (ct:string) => {
+        setFilter(ct)
     }
     useEffect(()=>{
         fetch(`http://${url}:4000/books/search/${search}/${filter}`)
@@ -90,19 +97,13 @@ function ResultsScreen({navigation}: ResultsProps) {
 
     }, [filter, countRes, search])
 
-    const handleSort = (ct:string) => {
-        setSortBy(ct)
-    }
 
-    const handleFilter = (ct:string) => {
-        setFilter(ct)
-    }
 
     return (
         <SafeAreaView style={styles.container}>
             <ScrollView style={styles.scrollView}>
-                <Subheading style={{fontSize:16}}>Dette er resultatet fra søket: {search}</Subheading>
-                <Paragraph style={{paddingTop:10, paddingBottom:10}}>Klikk på en rad for å få mer detaljer om boka.</Paragraph>
+                <Subheading style={{fontSize:16, textAlign: "center", marginTop:25}}>Dette er resultatet fra søket: {search}</Subheading>
+                <Paragraph style={{paddingTop:10, paddingBottom:10, textAlign: "center"}}>Klikk på en rad for å få mer detaljer om boka.</Paragraph>
 
                 <View style={styles.alignment}>
                     <FilterRating changeFilter={handleFilter} />
@@ -134,12 +135,8 @@ function ResultsScreen({navigation}: ResultsProps) {
                         </DataTable.Row>
                     )}
 
-                    {/*This is temporary, only frontend, must include working pagination here*/}
-                    {/*See https://callstack.github.io/react-native-paper/data-table-pagination.html*/}
-                </DataTable>
-                <View>
                     <Page style={{paddingTop:10, marginTop:20}} change={handlePagination} countRes={countRes} />
-                </View>
+                </DataTable>
 
             </ScrollView>
         </SafeAreaView>
