@@ -1,19 +1,19 @@
-import {Button, Text, View} from "react-native";
+import { Text, View} from "react-native";
 import React, {useEffect, useState} from "react";
 import { Rating, AirbnbRating } from 'react-native-elements';
+import { Button } from 'react-native-paper';
 
 interface SideBarProps {
     changeFilter: (ct:string) => void
 }
-const Sidebar = ({changeFilter}: SideBarProps) => {
+
+const FilterRating = ({changeFilter}: SideBarProps) => {
     const [radio, setRadio] = useState<string>("")
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        /**
-         * TODO: Link to result component
-         */
-        changeFilter(e.target.value)
-    }
+    useEffect(()=>{
+        changeFilter(radio)
+
+    }, [radio])
 
     const reset = () => {
         setRadio("")
@@ -26,19 +26,19 @@ const Sidebar = ({changeFilter}: SideBarProps) => {
     }
     return (
         <View>
+            <text>Filter:</text>
             <AirbnbRating
                 count={5}
-                reviews={["1", "2", "3", "4", "5"]}
+                showRating={false}
                 defaultRating={0}
-                size={20}
+                size={18}
                 onFinishRating={changeRadio}
             />
-            <Button
-                onPress={reset}
-                title="Nullstill"
-            />
+            <Button mode="contained" contentStyle={{height: 30}} onPress={reset}>
+                Nullstill
+            </Button>
         </View>
     );
 }
 
-export default Sidebar
+export default FilterRating

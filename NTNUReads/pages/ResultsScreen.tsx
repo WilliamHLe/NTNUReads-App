@@ -8,6 +8,9 @@ import url from "../url";
 
 import { StackScreenProps } from '@react-navigation/stack';
 import Page from "../components/Page";
+import ShowModal from "../components/ShowModal";
+import Sorting from "../components/Sorting";
+import FilterRating from "../components/filter/FilterRating";
 
 type ResultsParamList = {
     Details: {id: number};
@@ -25,6 +28,12 @@ const styles = StyleSheet.create({
         paddingTop: 40,
         padding: 10
     },
+    alignment: {
+        flexWrap: 'wrap',
+        alignItems: 'flex-start',
+        flexDirection:'row',
+        textAlign: "center",
+    }
 });
 
 function ResultsScreen({navigation}: ResultsProps) {
@@ -70,17 +79,33 @@ function ResultsScreen({navigation}: ResultsProps) {
 
     }, [filter, countRes, search])
 
+    const handleSort = (ct:string) => {
+        setSortBy(ct)
+    }
+
+    const handleFilter = (ct:string) => {
+        setFilter(ct)
+    }
+
     return (
         <View style={styles.container}>
+
             <Text style={{fontSize:16}}>Dette er resultatet fra søket: {search}</Text>
             <Text style={{paddingTop:10, paddingBottom:10}}>Klikk på en rad for å få mer detaljer om boka.</Text>
+            <View style={styles.alignment}>
+                <Sorting changeSort={handleSort} />
+                <FilterRating changeFilter={handleFilter} />
+            </View>
+
             {/*
             <Button
                 title="Go to DetailsScreen"
                 onPress={() => navDetails.navigate("Details")}
             />
             */}
+
             <DataTable>
+
                 <DataTable.Header>
                     <DataTable.Title>ISBN</DataTable.Title>
                     <DataTable.Title>Forfatter</DataTable.Title>
@@ -104,6 +129,7 @@ function ResultsScreen({navigation}: ResultsProps) {
 
             </DataTable>
             <Page style={{paddingTop:10, marginTop:20}} change={handlePagination} countRes={countRes} />
+            {/*<ShowModal />*/}
         </View>
     );
 }
