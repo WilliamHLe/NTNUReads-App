@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import {ScrollView, SafeAreaView, StyleSheet, View} from "react-native";
+import {ScrollView, SafeAreaView, StyleSheet, View, Text} from "react-native";
 import { useRoute } from '@react-navigation/native';
 //import {Text} from "react-native-elements";
 import { RouteProp } from '@react-navigation/native';
@@ -48,6 +48,7 @@ const styles = StyleSheet.create({
     }
 });
 
+
 function ResultsScreen({navigation}: ResultsProps) {
 
     //const navDetails = useNavigation<NavigationProp<ResultsParamList, 'Details'>>();
@@ -83,7 +84,7 @@ function ResultsScreen({navigation}: ResultsProps) {
         setCount(ct)
     }
     useEffect(()=>{
-        fetch(`http://localhost:4000/books/search/${search}/${filter}`)
+        fetch(`http://${url}:4000/books/search/${search}/${filter}`)
             .then(response => response.json())
             .then((data) => {
                 setCountRes(data)
@@ -137,10 +138,9 @@ function ResultsScreen({navigation}: ResultsProps) {
 
                     {/*This is temporary, only frontend, must include working pagination here*/}
                     {/*See https://callstack.github.io/react-native-paper/data-table-pagination.html*/}
-                </DataTable>
-                <View>
+
                     <Page style={{paddingTop:10, marginTop:20}} change={handlePagination} countRes={countRes} />
-                </View>
+                </DataTable>
 
             </ScrollView>
         </SafeAreaView>
