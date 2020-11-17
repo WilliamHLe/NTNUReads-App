@@ -8,13 +8,13 @@ const ShowModal = () => {
 
     const showModal = () => setVisible(true);
     const hideModal = () => setVisible(false);
-    const containerStyle = {backgroundColor: 'black', padding: 20, height: 100};
+    const containerStyle = {backgroundColor: 'white', padding: 20, height: 100};
 
     return (
         <Provider>
             <Portal>
                 <Modal visible={visible} onDismiss={hideModal} contentContainerStyle={containerStyle}>
-                    <Sorting />
+                    <text>Test</text>
                 </Modal>
             </Portal>
             <Button style={{marginTop: 30}} onPress={showModal}>

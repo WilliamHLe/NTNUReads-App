@@ -129,7 +129,6 @@ function ResultsScreen({navigation}: ResultsProps) {
 
             </DataTable>
             <Page style={{paddingTop:10, marginTop:20}} change={handlePagination} countRes={countRes} />
-            {/*<ShowModal />*/}
         </View>
     );
 }
