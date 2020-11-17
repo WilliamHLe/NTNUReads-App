@@ -7,26 +7,52 @@ import {
     ViewStyle,
     TextStyle,
     TextInputProps,
-    Alert,
+    Alert, ScrollView, SafeAreaView,
 } from 'react-native'
-import { Headline, Divider, List } from 'react-native-paper';
-import {Input,CheckBox,Button,Text} from 'react-native-elements'
+import {Headline, Divider, List, DataTable, Modal, Card, Paragraph, Button, Portal, Provider} from 'react-native-paper';
+import {Input,CheckBox,Text,Overlay} from 'react-native-elements'
 //import {useParams} from "react-router-dom";
 //import {ListGroup} from "react-bootstrap";
 //import AddFavorite from "../components/user/AddFavorite"
 //import {useSelector} from "react-redux";
 //import {AppState} from "../store/rootStore";
-//import CreateReview from "../components/review/CreateReview";
+import CreateReview from "../components/review/CreateReview";
 import {saveUser,getUser,removeUser} from "../asyncStorage"
 import AddFavorite from "../components/user/AddFavorite";
 import url from "../url"
+//import CreateReview from "../../src/components/review/CreateReview";
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        padding: 20,
+        paddingTop: 40,
+        justifyContent: 'center',
+    },
+    checkboxContainer: {
+        flexWrap: 'wrap',
+        alignItems: 'flex-start',
+        flexDirection:'row',
+        justifyContent: 'space-around',
+        paddingTop: 20,
+        paddingBottom: 20
+    },
+    button: {
+        width: "90%",
+        alignSelf: "center"
+    },
+    scrollView: {
+        marginHorizontal: 10,
+    }
+});
+
 
 const Detailed = (props:any) => {
 
    // const { id } = useParams()
     const id  = props.book;
     const [book, setBook] = useState<any[]>([])
-    const [review, setReview] = useState<any[]>([])
+
 
     //const theme = useSelector((state:AppState) => state.themeReducer.theme)
 
@@ -36,11 +62,6 @@ const Detailed = (props:any) => {
             .then(response => response.json())
             .then((data) => {
                 setBook(data)
-            })
-        fetch(`http://${url}:4000/review/${id}`)
-            .then(response => response.json())
-            .then((data) => {
-                setReview(data)
             })
     },[id])
     /*
@@ -89,25 +110,33 @@ const Detailed = (props:any) => {
         </div>
      */
 
+
+
     return (
-        <View>
+        <SafeAreaView style={styles.container}>
+            <ScrollView style={styles.scrollView}>
             {book.map(item =>
                 <View>
                     <Headline>{item.title}</Headline>
-                            <List.Item title={"Forfatter: " + item.authors}></List.Item>
+                            <List.Item title={"Forfatter: " + item.authors}/>
                             <Divider />
-                            <List.Item title={'ISBN/ISBN13: ' + item.isbn + "/" + item.isbn13}></List.Item>
+                            <List.Item title={'ISBN: ' + item.isbn}/>
                             <Divider />
-                            <List.Item title={'Utgivelsesdato: ' + item.publication_date.substring(0,10)}></List.Item>
+                            <List.Item title={'ISBN13: ' + item.isbn13}/>
                             <Divider />
-                            <List.Item title={'Utgiver: ' + item.publisher}></List.Item>
+                            <List.Item title={'Utgivelsesdato: ' + item.publication_date.substring(0, 10)}/>
                             <Divider />
-                            <List.Item title={'Språk: ' + item.language_code}></List.Item>
+                            <List.Item title={'Utgiver: ' + item.publisher}/>
+                            <Divider />
+                            <List.Item title={'Språk: ' + item.language_code}/>
                             <Divider />
                     <AddFavorite book={item._id}/>
+
                 </View>
             )}
-        </View>
+            <CreateReview book={id}/>
+            </ScrollView>
+        </SafeAreaView>
 
     );
 }
