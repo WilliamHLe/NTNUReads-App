@@ -56,15 +56,17 @@ function ProfileScreen({navigation}: ProfileProps) {
     const handleLogOut = () => {
         getUser().then(res => {
             if(res != null) {
-                removeUser()
+                removeUser().then(() => {
+                    navLogin.reset({
+                        index: 0,
+                        routes: [{ name: 'Login' }],
+                    });
+                })
                 console.log(res)
                 //alert("Du har logget ut!");
             }
         })
-        navLogin.reset({
-            index: 0,
-            routes: [{ name: 'Login' }],
-        });
+
     }
 
     return (
