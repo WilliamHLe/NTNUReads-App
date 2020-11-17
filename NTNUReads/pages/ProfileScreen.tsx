@@ -4,7 +4,7 @@ import {SafeAreaView, ScrollView, StyleSheet} from "react-native";
 import { StackScreenProps } from '@react-navigation/stack';
 import {getUser, removeUser} from "../asyncStorage";
 import {NavigationProp, useNavigation} from "@react-navigation/native";
-import {DataTable, Title, Button} from "react-native-paper";
+import {DataTable, Title, Button, Subheading} from "react-native-paper";
 import Constants from "expo-constants";
 import url from "../url";
 
@@ -20,10 +20,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         flexDirection: "row",
-        alignItems: 'center',
-        //justifyContent: 'space-between',
-        //paddingTop: 40,
-        //padding: 10,
         margin: 20,
         marginTop: Constants.statusBarHeight,
     },
@@ -35,12 +31,7 @@ const styles = StyleSheet.create({
 
 function ProfileScreen({navigation}: ProfileProps) {
 
-    //const navDetails = useNavigation<NavigationProp<ProfileParamList, 'Details'>>();
     const navLogin = useNavigation<NavigationProp<ProfileParamList, 'Login'>>();
-    const [user, setUser] = useState<any>()
-    //const user = "";
-
-
 
     const [searchResult, setSearchResult] = useState<any[]>([])
 
@@ -80,6 +71,12 @@ function ProfileScreen({navigation}: ProfileProps) {
         <SafeAreaView style={styles.container}>
             <ScrollView style={styles.scrollView}>
                 <Title>Din profil</Title>
+                <Button
+                    mode={"contained"}
+                    onPress={handleLogOut}
+                >Logg ut
+                </Button>
+                <Subheading style={{paddingBottom: 10, paddingTop:30}}>Dine favorittbøker</Subheading>
                 <DataTable>
                     <DataTable.Header>
                         <DataTable.Title>ISBN</DataTable.Title>
@@ -97,11 +94,6 @@ function ProfileScreen({navigation}: ProfileProps) {
                         </DataTable.Row>
                     )}
                 </DataTable>
-                <Button
-                    mode={"contained"}
-                    onPress={handleLogOut}
-                >Logg ut
-                </Button>
             </ScrollView>
         </SafeAreaView>
     );

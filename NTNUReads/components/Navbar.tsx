@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import HomeScreen from "../pages/HomeScreen";
 import DetailsScreen from "../pages/DetailsScreen";
@@ -8,12 +8,6 @@ import LoginScreen from "../pages/LoginScreen";
 import SearchScreen from "../pages/SearchScreen";
 import ResultsScreen from "../pages/ResultsScreen";
 import { createStackNavigator } from '@react-navigation/stack';
-
-import {AppState} from "../store/rootStore";
-import {useSelector} from "react-redux";
-
-import {getUser, removeUser} from "../asyncStorage";
-import {useTheme} from "react-native-paper";
 
 const HomeStack = createStackNavigator();
 const SearchStack = createStackNavigator();
@@ -27,9 +21,6 @@ function Navbar() {
     return (
         <Tab.Navigator
             initialRouteName="Home"
-            //barStyle={{backgroundColor: colors.primary}}
-            //activeColor="#e91e63"
-            //style={{ backgroundColor: 'tomato' }}
         >
             <Tab.Screen
                 name="Home"
@@ -72,11 +63,9 @@ export default Navbar;
 const HomeStackScreen = () => (
     <HomeStack.Navigator>
         <HomeStack.Screen name="Home" component={HomeScreen} options={{title: 'Hjem'}}/>
-        {/*Can search for all books (entire dataset) from HomeScreen (?)*/}
-        <HomeStack.Screen name="Results" component={ResultsScreen} options={{title: 'Resultater'}}/>
-        <HomeStack.Screen name="Details" component={DetailsScreen} options={{title: 'Detaljer'}}/>
     </HomeStack.Navigator>
 );
+
 
 const SearchStackScreen = () => (
     <SearchStack.Navigator>
@@ -92,9 +81,8 @@ const SearchStackScreen = () => (
 const ProfileStackScreen = () => {
 
     return (
-        //Should go directly to login if not logged in -> fix when login state is available
+        //Should go directly to login if not logged in. If logged in -> go to profile
         <ProfileStack.Navigator>
-            {/*<ProfileStack.Navigator>*/}
             <ProfileStack.Screen name="Login" component={LoginScreen} options={{title: 'Logg inn'}}/>
             <ProfileStack.Screen name="Profile" component={ProfileScreen} options={{title: 'Profil'}}/>
             {/*Can go from list of favorites to details about favorites when clicking details button*/}

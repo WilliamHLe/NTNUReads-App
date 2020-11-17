@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {Alert, StyleSheet, View} from 'react-native'
 //import {Input, CheckBox, Button, Text,} from 'react-native-elements'
-import {TextInput, Checkbox, Button, Text} from "react-native-paper";
+import {TextInput, Checkbox, Button, Text, HelperText} from "react-native-paper";
 import url from "../../url"
 import {getUser, removeUser, saveUser} from "../../asyncStorage"
 import {NavigationProp, useNavigation} from "@react-navigation/native";
@@ -127,7 +127,13 @@ const LoginForm = () => {
 
             <View>
                 <TextInput label={"Brukernavn"} placeholder="Brukernavn" value={username} autoCapitalize = 'none' onChangeText={(username)=>setUsername(username)}/>
+                <HelperText type="info" visible={true}>
+                    Tips: willi1 er et fint brukernavn
+                </HelperText>
                 <TextInput label={"Passord"} placeholder="Passord" value={password} secureTextEntry={true} onChangeText={(password)=>setPassword(password)} />
+                <HelperText type="info" visible={true}>
+                    Tips: willi123 er et fint passord
+                </HelperText>
                 <View style={styles.checkboxContainer}>
                     <Checkbox.Android
                         status={securityCheck ? 'checked' : 'unchecked'}

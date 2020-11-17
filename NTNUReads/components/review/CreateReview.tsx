@@ -110,7 +110,7 @@ const CreateReview = (props:any) => {
             <TextInput label={"Navn"} placeholder="Navn" value={name} onChangeText={(name) => setName(name)}/>
             <View style={{flexDirection:"row"}}>
             <RadioButton.Group onValueChange={newValue => setRating(newValue)} value={rating}  >
-                <View style={{flexDirection:"row"}}>
+                <View style={{flexWrap: 'wrap',flexDirection:"row", alignItems: 'flex-start',justifyContent: 'space-around',}}>
                     <RadioButton.Item style={styles.radioItem} label="1" value="1" />
                     <RadioButton.Item style={styles.radioItem} label="2" value="2" />
                     <RadioButton.Item style={styles.radioItem} label="3" value="3" />
