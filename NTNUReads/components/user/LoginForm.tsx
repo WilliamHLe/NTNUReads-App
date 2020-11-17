@@ -44,7 +44,6 @@ const LoginForm = () => {
     // const theme = useSelector((state:AppState) => state.themeReducer.theme)
 
     //send user directly to profile if already logged in
-
     getUser().then(res => {
         if(res != null) {
             navigation.reset({

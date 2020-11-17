@@ -112,7 +112,7 @@ const CreateReview = (props:any) => {
                 <Modal visible={visible} onDismiss={()=>toggleModal()} contentContainerStyle={{marginHorizontal:20,marginVertical:40}}>
                     <ScrollView >
                         {reviews.map(item =>
-                            <View>
+                            <View key={item._id}>
                                 <Card>
                                     <Card.Content>
                                         <Paragraph>{item.review}</Paragraph>

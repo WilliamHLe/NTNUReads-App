@@ -55,7 +55,7 @@ function ProfileScreen({navigation}: ProfileProps) {
                 //console.log(data.books);
                     if(isMounted) setSearchResult(data.books);
             })
-                console.log(res)
+                //console.log(res)
             }
         })
 
@@ -66,7 +66,7 @@ function ProfileScreen({navigation}: ProfileProps) {
         getUser().then(res => {
             if(res != null) {
                 removeUser()
-                console.log(res)
+                //console.log(res)
                 //alert("Du har logget ut!");
             }
         })
