@@ -14,7 +14,6 @@ export const saveUser = async (value:JSON) => {
 export const getUser = async () => {
     try {
         const jsonValue = await AsyncStorage.getItem('user')
-        console.log(jsonValue)
         return jsonValue// != null ? JSON.parse(jsonValue) : null;
     } catch(e) {
         return null

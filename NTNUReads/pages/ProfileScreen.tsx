@@ -45,21 +45,21 @@ function ProfileScreen({navigation}: ProfileProps) {
     const [searchResult, setSearchResult] = useState<any[]>([])
 
     useEffect(()=>{
-        let isMounted = true;
+        let isMounted = false;
         getUser().then(res => {
             if(res != null) {
                 const us = JSON.parse(res)
                 fetch("http://"+url+":4000/favorite/user/"+us._id+"")
                 .then(response => response.json())
                 .then((data) => {
-                //console.log(data.books);
-                    if(isMounted) setSearchResult(data.books);
+                    if(!isMounted) setSearchResult(data.books);
             })
-                console.log(res)
             }
         })
-
-    },[searchResult])
+        return () => {
+            isMounted = true;
+        };
+    },[])
     //console.log(us)
 
     const handleLogOut = () => {
