@@ -1,4 +1,3 @@
-import {Button, Text, View} from "react-native";
 import React, {useEffect, useState} from "react";
 import { DataTable } from "react-native-paper";
 

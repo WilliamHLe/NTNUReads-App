@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from "react";
 import {ScrollView, SafeAreaView, StyleSheet, View, Text} from "react-native";
 import { useRoute } from '@react-navigation/native';
-//import {Text} from "react-native-elements";
 import { RouteProp } from '@react-navigation/native';
 import {DataTable, Subheading, Paragraph} from "react-native-paper";
 import url from "../url";
@@ -9,7 +8,6 @@ import Constants from 'expo-constants';
 
 import { StackScreenProps } from '@react-navigation/stack';
 import Page from "../components/Page";
-import ShowModal from "../components/ShowModal";
 import Sorting from "../components/Sorting";
 import FilterRating from "../components/filter/FilterRating";
 import {getUser, removeUser} from "../asyncStorage";
@@ -76,12 +74,19 @@ function ResultsScreen({navigation}: ResultsProps) {
 
     }, [search, count, sortBy, filter])
 
-    //console.log(searchResult)
 
     // Pagination
     const [countRes, setCountRes] = useState(0)
     const handlePagination = (ct:number) => {
         setCount(ct)
+    }
+
+    const handleSort = (ct:string) => {
+        setSortBy(ct)
+    }
+
+    const handleFilter = (ct:string) => {
+        setFilter(ct)
     }
     useEffect(()=>{
         fetch(`http://${url}:4000/books/search/${search}/${filter}`)
@@ -92,13 +97,7 @@ function ResultsScreen({navigation}: ResultsProps) {
 
     }, [filter, countRes, search])
 
-    const handleSort = (ct:string) => {
-        setSortBy(ct)
-    }
 
-    const handleFilter = (ct:string) => {
-        setFilter(ct)
-    }
 
     return (
         <SafeAreaView style={styles.container}>
@@ -135,9 +134,6 @@ function ResultsScreen({navigation}: ResultsProps) {
                             <DataTable.Title numeric>{item.average_rating}</DataTable.Title>
                         </DataTable.Row>
                     )}
-
-                    {/*This is temporary, only frontend, must include working pagination here*/}
-                    {/*See https://callstack.github.io/react-native-paper/data-table-pagination.html*/}
 
                     <Page style={{paddingTop:10, marginTop:20}} change={handlePagination} countRes={countRes} />
                 </DataTable>
