@@ -1,4 +1,4 @@
-import { Picker, View} from "react-native";
+import { Text, Picker, View} from "react-native";
 import React, {useEffect, useState} from "react";
 import url from "../url";
 
@@ -18,7 +18,7 @@ const Sorting = ({changeSort}: SortingProps) => {
     }, [selectedValue])
     return (
         <View>
-            <text>Sorter etter:</text>
+            <Text>Sorter etter:</Text>
             <Picker
                 selectedValue={selectedValue}
                 style={{ height: 25, width: 125 }}

@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { Image } from 'react-native';
-import { Modal, Portal, Text, Button, Provider } from 'react-native-paper';
+import { Text, Image } from 'react-native';
+import { Modal, Portal, Button, Provider } from 'react-native-paper';
 import Sorting from "./Sorting";
 
 const ShowModal = () => {
@@ -14,7 +14,7 @@ const ShowModal = () => {
         <Provider>
             <Portal>
                 <Modal visible={visible} onDismiss={hideModal} contentContainerStyle={containerStyle}>
-                    <text>Test</text>
+                    <Text>Test</Text>
                 </Modal>
             </Portal>
             <Button style={{marginTop: 30}} onPress={showModal}>
