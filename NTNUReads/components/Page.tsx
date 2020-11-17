@@ -1,4 +1,3 @@
-import {Button} from "react-native";
 import React, {useEffect, useState} from "react";
 import { DataTable } from "react-native-paper";
 
@@ -10,7 +9,7 @@ const Page = (props:any) => {
 
     useEffect(() => {
         setCountRes(props.countRes)
-    }, [setCountRes, props.countRes])
+    }, [countRes, props.countRes])
 
 
     const changePage = (page:any) => {
@@ -28,6 +27,7 @@ const Page = (props:any) => {
 
     return(
         <DataTable.Pagination
+            style={{alignSelf: "center"}}
             page={pagination}
             numberOfPages={Math.floor(countRes/10 + 2)}
             onPageChange={page => {

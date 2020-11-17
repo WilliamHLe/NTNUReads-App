@@ -1,7 +1,7 @@
-import { Text, View } from "react-native";
+import { View } from "react-native";
 import React, {useEffect, useState} from "react";
 import { AirbnbRating } from 'react-native-elements';
-import { Button } from 'react-native-paper';
+import {Button, Paragraph} from 'react-native-paper';
 
 interface SideBarProps {
     changeFilter: (ct:string) => void
@@ -30,7 +30,7 @@ const FilterRating = ({changeFilter}: SideBarProps) => {
     }
     return (
         <View style={{marginRight: 15}}>
-            <Text style={{textAlign: "center"}}>Filterer rating:</Text>
+            <Paragraph style={{textAlign: "center"}}>Filterer rating:</Paragraph>
             <AirbnbRating
                 count={5}
                 showRating={false}
