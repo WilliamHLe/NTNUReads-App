@@ -30,8 +30,8 @@ const styles = StyleSheet.create({
         //justifyContent: 'space-between',
         //paddingTop: 40,
         //padding: 10,
-        margin: 20,
-        marginTop: Constants.statusBarHeight,
+        //margin: 20,
+        //marginTop: Constants.statusBarHeight,
     },
     alignment: {
         flexWrap: 'wrap',
@@ -41,9 +41,10 @@ const styles = StyleSheet.create({
         alignContent: "center",
         alignSelf: "center",
         textAlignVertical: "center",
+        marginVertical: 20
     },
     scrollView: {
-        marginHorizontal: 10,
+        marginHorizontal: 0,
     }
 });
 
@@ -101,8 +102,8 @@ function ResultsScreen({navigation}: ResultsProps) {
     return (
         <SafeAreaView style={styles.container}>
             <ScrollView style={styles.scrollView}>
-                <Subheading style={{fontSize:16}}>Dette er resultatet fra søket: {search}</Subheading>
-                <Paragraph style={{paddingTop:10, paddingBottom:10}}>Klikk på en rad for å få mer detaljer om boka.</Paragraph>
+                <Subheading style={{fontSize:16, textAlign: "center", marginTop:25}}>Dette er resultatet fra søket: {search}</Subheading>
+                <Paragraph style={{paddingTop:10, paddingBottom:10, textAlign: "center"}}>Klikk på en rad for å få mer detaljer om boka.</Paragraph>
 
                 <View style={styles.alignment}>
                     <FilterRating changeFilter={handleFilter} />
