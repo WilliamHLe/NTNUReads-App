@@ -45,6 +45,7 @@ function ProfileScreen({navigation}: ProfileProps) {
     const [searchResult, setSearchResult] = useState<any[]>([])
 
     useEffect(()=>{
+        let isMounted = true;
         getUser().then(res => {
             if(res != null) {
                 const us = JSON.parse(res)
@@ -52,13 +53,13 @@ function ProfileScreen({navigation}: ProfileProps) {
                 .then(response => response.json())
                 .then((data) => {
                 //console.log(data.books);
-                    setSearchResult(data.books)
+                    if(isMounted) setSearchResult(data.books);
             })
                 console.log(res)
             }
         })
 
-    },[user])
+    },[searchResult])
     //console.log(us)
 
     const handleLogOut = () => {
