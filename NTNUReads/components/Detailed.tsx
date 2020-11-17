@@ -16,9 +16,9 @@ import {Input,CheckBox,Text,Overlay} from 'react-native-elements'
 //import AddFavorite from "../components/user/AddFavorite"
 //import {useSelector} from "react-redux";
 //import {AppState} from "../store/rootStore";
-import CreateReview from "../components/review/CreateReview";
+import CreateReview from "./review/CreateReview";
 import {saveUser,getUser,removeUser} from "../asyncStorage"
-import AddFavorite from "../components/user/AddFavorite";
+import AddFavorite from "./user/AddFavorite";
 import url from "../url"
 //import CreateReview from "../../src/components/review/CreateReview";
 
@@ -71,7 +71,7 @@ const Detailed = (props:any) => {
         <SafeAreaView style={styles.container}>
             <ScrollView style={styles.scrollView}>
             {book.map(item =>
-                <View key={item}>
+                <View key={item._id}>
                     <Headline key={item.title}>{item.title}</Headline>
                             <List.Item title={"Forfatter: " + item.authors} key={item.authors}/>
                             <Divider key={1}/>
