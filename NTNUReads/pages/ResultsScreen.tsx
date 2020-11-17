@@ -82,7 +82,7 @@ function ResultsScreen({navigation}: ResultsProps) {
         setCount(ct)
     }
     useEffect(()=>{
-        fetch(`http://localhost:4000/books/search/${search}/${filter}`)
+        fetch(`http://${url}:4000/books/search/${search}/${filter}`)
             .then(response => response.json())
             .then((data) => {
                 setCountRes(data)

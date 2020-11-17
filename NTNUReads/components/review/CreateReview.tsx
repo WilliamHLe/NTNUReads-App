@@ -40,12 +40,8 @@ const styles = StyleSheet.create({
     scrollView: {
         marginHorizontal: 10,
     },
-    radioGroup: {
-        alignItems: 'flex-start',
-        flexDirection:'row',
-        justifyContent: 'space-around',
-        margin:0,
-        alignSelf: "center"
+    radioItem: {
+        width: 50
     }
 });
 
@@ -58,6 +54,7 @@ const CreateReview = (props:any) => {
     const [reviews, setReviews] = useState<any[]>([])
     const [visible, setVisible] = useState(false)
 
+    // Fetches the reviews for the book
     useEffect(()=>{
         fetch(`http://${url}:4000/review/${book}`)
             .then(response => response.json())
@@ -67,8 +64,14 @@ const CreateReview = (props:any) => {
     },[reviews])
 
     const onFormSubmit = () => {
+        // Return an error if no name or review text has been entered
         if(name == "" || review == "") {
             alert("Fyll inn navn og anmeldelsetekst")
+            return
+        }
+        // Return an error if the review text is bigger than the specified size
+        if(review.length > 250) {
+            alert("Anmeldelsen må være maks 250 tegn")
             return
         }
         fetch(`http://${url}:4000/review/add`, {
@@ -86,10 +89,13 @@ const CreateReview = (props:any) => {
             })
         })
             .then( (response) => {
+                setName("")
+                setReview("")
                 console.log("Success")
             });
     }
 
+    // Toggles the visibility of the modal for reviews
     const toggleModal = () => {
         setVisible(!visible)
     }
@@ -97,26 +103,32 @@ const CreateReview = (props:any) => {
     return(
         <View>
             <Subheading style={{fontSize:16}}>Skriv en anmeldelse:</Subheading>
-            <TextInput label={"Navn"} placeholder="Navn" value={name} onChangeText={(name)=>setName(name)}></TextInput>
-            <RadioButton.Group onValueChange={newValue => setRating(newValue)} value={rating} >
-                    <RadioButton.Item label="1" value="1" />
-                    <RadioButton.Item label="2" value="2" />
-                    <RadioButton.Item label="3" value="3" />
-                    <RadioButton.Item label="4" value="4" />
-                    <RadioButton.Item label="5" value="5" />
+            <TextInput label={"Navn"} placeholder="Navn" value={name} onChangeText={(name) => setName(name)}/>
+            <View style={{flexDirection:"row"}}>
+            <RadioButton.Group onValueChange={newValue => setRating(newValue)} value={rating}  >
+                <View style={{flexDirection:"row"}}>
+                    <RadioButton.Item style={styles.radioItem} label="1" value="1" />
+                    <RadioButton.Item style={styles.radioItem} label="2" value="2" />
+                    <RadioButton.Item style={styles.radioItem} label="3" value="3" />
+                    <RadioButton.Item style={styles.radioItem} label="4" value="4" />
+                    <RadioButton.Item style={styles.radioItem} label="5" value="5" />
+                </View>
             </RadioButton.Group>
-            <TextInput multiline={true} numberOfLines={4} label={"Anmeldelse"} placeholder="Anmeldelse" value={review} onChangeText={(review)=>setReview(review)}></TextInput>
+            </View>
+            <TextInput multiline={true} numberOfLines={4} label={"Anmeldelse (maks 250 tegn)"} placeholder="Anmeldelse" value={review} onChangeText={(review) => setReview(review)}/>
+            <Text>{review.length}/250</Text>
             <Button style={styles.button} mode={"contained"} onPress={() => onFormSubmit()}>Legg til anmeldelse
             </Button>
             <Portal>
                 <Modal visible={visible} onDismiss={()=>toggleModal()} contentContainerStyle={{marginHorizontal:20,marginVertical:40}}>
                     <ScrollView >
                         {reviews.map(item =>
-                            <View>
+                            <View key={item._id}>
                                 <Card>
                                     <Card.Content>
+                                        <Paragraph style={{fontSize:10}}>{item.createdAt.substring(0,10)} {item.createdAt.substring(11,19)}</Paragraph>
                                         <Paragraph>{item.review}</Paragraph>
-                                        <View><Paragraph style={{fontSize:10}}>{item.rating}/5, {item.name}, {item.createdAt.substring(0,10)}</Paragraph></View>
+                                        <Paragraph style={{fontSize:10}}>{item.rating}/5, {item.name}</Paragraph>
                                     </Card.Content>
                                 </Card>
                                 <Divider/>
