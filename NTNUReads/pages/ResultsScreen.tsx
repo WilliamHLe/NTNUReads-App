@@ -66,7 +66,7 @@ function ResultsScreen({navigation}: ResultsProps) {
 
     // Fetch result from database using the searchText
     useEffect(()=>{
-        fetch(`http://${url}:3000/books/search/${search}/${count}/${sortBy}/${filter}`)
+        fetch(`http://it2810-13.idi.ntnu.no/books/search/${search}/${count}/${sortBy}/${filter}`)
             .then(response => response.json())
             .then((data) => {
                 setSearchResult(data)
@@ -89,7 +89,7 @@ function ResultsScreen({navigation}: ResultsProps) {
         setFilter(ct)
     }
     useEffect(()=>{
-        fetch(`http://${url}:3000/books/search/${search}/${filter}`)
+        fetch(`http://it2810-13.idi.ntnu.no/books/search/${search}/${filter}`)
             .then(response => response.json())
             .then((data) => {
                 setCountRes(data)

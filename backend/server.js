@@ -12,7 +12,7 @@ const reviewRoute = require('../backend/routes/review.routes')
 
 // Connecting mongoDB Database
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost/it281013p3', {
+mongoose.connect(dbConfig.db, {
     useNewUrlParser: true
 }).then(() => {
         console.log('Database sucessfully connected!')
@@ -39,7 +39,7 @@ app.use('/review', reviewRoute)
 
 // PORT
 const port = process.env.PORT || 3000;
-const server = app.listen(3000, () => {
+const server = app.listen(port, () => {
     console.log('Connected to port ' + port)
 })
 
