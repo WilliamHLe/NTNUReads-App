@@ -1,6 +1,6 @@
-import { Text, View} from "react-native";
+import { View } from "react-native";
 import React, {useEffect, useState} from "react";
-import { Rating, AirbnbRating } from 'react-native-elements';
+import { AirbnbRating } from 'react-native-elements';
 import { Button } from 'react-native-paper';
 
 interface SideBarProps {
@@ -9,20 +9,24 @@ interface SideBarProps {
 
 const FilterRating = ({changeFilter}: SideBarProps) => {
     const [radio, setRadio] = useState<string>("")
+    const [df, setDefaultrating] = useState<number>(0)
 
     useEffect(()=>{
         changeFilter(radio)
 
-    }, [radio])
+    }, [radio, df])
 
     const reset = () => {
         setRadio("")
         changeFilter("")
+        setDefaultrating(0)
     }
 
     const changeRadio = (e: { toString: () => any; }) => {
         const val = e.toString()
         setRadio(val)
+        // @ts-ignore
+        setDefaultrating(e)
     }
     return (
         <View>
@@ -30,7 +34,7 @@ const FilterRating = ({changeFilter}: SideBarProps) => {
             <AirbnbRating
                 count={5}
                 showRating={false}
-                defaultRating={0}
+                defaultRating={df}
                 size={18}
                 onFinishRating={changeRadio}
             />
