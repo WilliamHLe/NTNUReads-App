@@ -8,6 +8,7 @@ import {Button, Form} from "react-bootstrap";
 interface SideBarProps {
     changeFilter: (ct:string) => void
 }
+
 const Sidebar = ({changeFilter}: SideBarProps) => {
     const [radio, setRadio] = useState<string>("")
 

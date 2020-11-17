@@ -8,6 +8,10 @@ import url from "../url";
 import Constants from 'expo-constants';
 
 import { StackScreenProps } from '@react-navigation/stack';
+import Page from "../components/Page";
+import ShowModal from "../components/ShowModal";
+import Sorting from "../components/Sorting";
+import FilterRating from "../components/filter/FilterRating";
 import {getUser, removeUser} from "../asyncStorage";
 
 type ResultsParamList = {
@@ -29,6 +33,12 @@ const styles = StyleSheet.create({
         margin: 20,
         marginTop: Constants.statusBarHeight,
     },
+    alignment: {
+        flexWrap: 'wrap',
+        alignItems: 'flex-start',
+        flexDirection:'row',
+        textAlign: "center",
+    }
     scrollView: {
         marginHorizontal: 10,
     }
@@ -63,11 +73,37 @@ function ResultsScreen({navigation}: ResultsProps) {
 
     //console.log(searchResult)
 
+    // Pagination
+    const [countRes, setCountRes] = useState(0)
+    const handlePagination = (ct:number) => {
+        setCount(ct)
+    }
+    useEffect(()=>{
+        fetch(`http://localhost:4000/books/search/${search}/${filter}`)
+            .then(response => response.json())
+            .then((data) => {
+                setCountRes(data)
+            })
+
+    }, [filter, countRes, search])
+
+    const handleSort = (ct:string) => {
+        setSortBy(ct)
+    }
+
+    const handleFilter = (ct:string) => {
+        setFilter(ct)
+    }
+
     return (
         <SafeAreaView style={styles.container}>
             <ScrollView style={styles.scrollView}>
                 <Subheading style={{fontSize:16}}>Dette er resultatet fra søket: {search}</Subheading>
                 <Paragraph style={{paddingTop:10, paddingBottom:10}}>Klikk på en rad for å få mer detaljer om boka.</Paragraph>
+                <View style={styles.alignment}>
+                    <Sorting changeSort={handleSort} />
+                    <FilterRating changeFilter={handleFilter} />
+                </View>
                 {/*
                 <Button
                     title="Go to DetailsScreen"
@@ -95,15 +131,8 @@ function ResultsScreen({navigation}: ResultsProps) {
 
                     {/*This is temporary, only frontend, must include working pagination here*/}
                     {/*See https://callstack.github.io/react-native-paper/data-table-pagination.html*/}
-                    <DataTable.Pagination
-                        page={1}
-                        numberOfPages={3}
-                        onPageChange={page => {
-                            console.log(page);
-                        }}
-                        label="1-2 of 6"
-                    />
                 </DataTable>
+                <Page style={{paddingTop:10, marginTop:20}} change={handlePagination} countRes={countRes} />
             </ScrollView>
         </SafeAreaView>
     );
