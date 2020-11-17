@@ -1,7 +1,6 @@
 import React from 'react';
 import {StyleSheet, View, ImageBackground} from "react-native";
-//import {Text, Button} from "react-native-elements";
-import {Title, Headline, Subheading, Button} from "react-native-paper";
+import {Headline, Subheading} from "react-native-paper";
 
 import ThemeSwitch from "../components/theme/ThemeSwitch";
 

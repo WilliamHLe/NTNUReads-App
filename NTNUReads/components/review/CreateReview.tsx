@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {Alert, StyleSheet, View,ScrollView, SafeAreaView} from 'react-native'
+import {StyleSheet, View,ScrollView} from 'react-native'
 import {
     TextInput,
     RadioButton,
@@ -35,13 +35,14 @@ const styles = StyleSheet.create({
     },
     button: {
         width: "90%",
-        alignSelf: "center"
+        alignSelf: "center",
     },
     scrollView: {
         marginHorizontal: 10,
     },
     radioItem: {
-        width: 50
+        width: 50,
+        paddingRight:5
     }
 });
 
@@ -106,11 +107,11 @@ const CreateReview = (props:any) => {
 
     return(
         <View>
-            <Subheading style={{fontSize:16}}>Skriv en anmeldelse:</Subheading>
+            <Subheading style={{fontSize:16, paddingTop:20}}>Skriv en anmeldelse:</Subheading>
             <TextInput label={"Navn"} placeholder="Navn" value={name} onChangeText={(name) => setName(name)}/>
-            <View style={{flexDirection:"row"}}>
+            <View style={{flexDirection:"row", paddingTop:5, paddingBottom:10}}>
             <RadioButton.Group onValueChange={newValue => setRating(newValue)} value={rating}  >
-                <View style={{flexWrap: 'wrap',flexDirection:"row", alignItems: 'flex-start',justifyContent: 'space-around',}}>
+                <View style={{flexDirection:"row"}}>
                     <RadioButton.Item style={styles.radioItem} label="1" value="1" />
                     <RadioButton.Item style={styles.radioItem} label="2" value="2" />
                     <RadioButton.Item style={styles.radioItem} label="3" value="3" />
@@ -120,7 +121,7 @@ const CreateReview = (props:any) => {
             </RadioButton.Group>
             </View>
             <TextInput multiline={true} numberOfLines={4} label={"Anmeldelse (maks 250 tegn)"} placeholder="Anmeldelse" value={review} onChangeText={(review) => setReview(review)}/>
-            <Text>{review.length}/250</Text>
+            <Text style={{paddingBottom: 20}}>{review.length}/250</Text>
             <Button style={styles.button} mode={"contained"} onPress={() => onFormSubmit()}>Legg til anmeldelse
             </Button>
             <Portal>
@@ -144,7 +145,9 @@ const CreateReview = (props:any) => {
                     </Button>
                 </Modal>
             </Portal>
-            <Divider/>
+            <View style={{paddingTop:10, paddingBottom:10}}>
+                <Divider />
+            </View>
             <Button style={styles.button} mode={"contained"} onPress={() => toggleModal()}>
                 Vis anmeldelser
             </Button>

@@ -1,13 +1,5 @@
 import React, {useState} from "react";
-import {
-    View,
-    TextInput,
-    StyleSheet,
-    ViewStyle,
-    TextStyle,
-    TextInputProps,
-    Alert,
-} from 'react-native'
+import {View} from 'react-native'
 import GetFavorite from "./GetFavorite"
 import {getUser} from "../../asyncStorage";
 

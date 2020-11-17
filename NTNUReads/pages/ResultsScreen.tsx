@@ -4,13 +4,10 @@ import { useRoute } from '@react-navigation/native';
 import { RouteProp } from '@react-navigation/native';
 import {DataTable, Subheading, Paragraph} from "react-native-paper";
 import url from "../url";
-import Constants from 'expo-constants';
-
 import { StackScreenProps } from '@react-navigation/stack';
 import Page from "../components/Page";
 import Sorting from "../components/Sorting";
 import FilterRating from "../components/filter/FilterRating";
-import {getUser, removeUser} from "../asyncStorage";
 
 type ResultsParamList = {
     Details: {id: number};
@@ -24,11 +21,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         flexDirection: "row",
-        //alignItems: 'center',
-        //justifyContent: 'space-between',
-        //paddingTop: 40,
-        //padding: 10,
-        //margin: 20,
         //marginTop: Constants.statusBarHeight,
     },
     alignment: {
@@ -48,8 +40,6 @@ const styles = StyleSheet.create({
 
 
 function ResultsScreen({navigation}: ResultsProps) {
-
-    //const navDetails = useNavigation<NavigationProp<ResultsParamList, 'Details'>>();
 
     //route is used to access search word which is sent as parameter
     const route = useRoute<RouteProp<ResultsParamList, 'Results'>>();
@@ -110,12 +100,6 @@ function ResultsScreen({navigation}: ResultsProps) {
                     <Sorting changeSort={handleSort} />
                 </View>
 
-                {/*
-                <Button
-                    title="Go to DetailsScreen"
-                    onPress={() => navDetails.navigate("Details")}
-                />
-                */}
                 <DataTable>
                     <DataTable.Header>
                         <DataTable.Title>ISBN</DataTable.Title>

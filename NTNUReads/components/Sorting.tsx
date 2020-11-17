@@ -1,7 +1,6 @@
-import { Text, View, StyleSheet} from "react-native";
+import {View, StyleSheet} from "react-native";
 import React, {useEffect, useState} from "react";
-import url from "../url";
-import {Button, Menu, Divider, Provider, Paragraph} from 'react-native-paper';
+import {Paragraph} from 'react-native-paper';
 import RNPickerSelect from 'react-native-picker-select';
 
 interface SortingProps {

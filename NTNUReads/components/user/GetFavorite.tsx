@@ -1,13 +1,4 @@
-import {
-    View,
-    TextInput,
-    StyleSheet,
-    ViewStyle,
-    TextStyle,
-    TextInputProps,
-    Alert,
-} from 'react-native'
-import {Input, CheckBox,} from 'react-native-elements'
+import {View,} from 'react-native'
 import {Button} from "react-native-paper"
 import React, {useEffect, useState} from "react";
 import {getUser} from "../../asyncStorage";

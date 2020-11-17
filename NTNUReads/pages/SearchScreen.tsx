@@ -16,7 +16,6 @@ const styles = StyleSheet.create({
         flex: 1,
         padding: 20,
         paddingTop: 40,
-        //justifyContent: 'center',
     },
     searchBar: {
         paddingTop: 10
@@ -78,8 +77,6 @@ function SearchScreen({navigation}: SearchProps) {
             <View style={styles.searchBar}>
                 <Searchbar
                     placeholder="Tittel, forfatter eller ISBN"
-                    //platform={"ios"}    //searchbar design is weird if we don't use a platform
-                    //containerStyle={{width: "100%", backgroundColor:"transparent"}}
                     onChangeText={updateSearch}
                     value={searchText}
                 />

@@ -1,26 +1,14 @@
 import React, {useEffect, useState} from "react";
-// import {Table} from 'react-bootstrap';
 import {
     View,
-    TextInput,
     StyleSheet,
-    ViewStyle,
-    TextStyle,
-    TextInputProps,
-    Alert, ScrollView, SafeAreaView,
+    ScrollView,
+    SafeAreaView,
 } from 'react-native'
-import {Headline, Divider, List, DataTable, Modal, Card, Paragraph, Button, Portal, Provider} from 'react-native-paper';
-import {Input,CheckBox,Text,Overlay} from 'react-native-elements'
-//import {useParams} from "react-router-dom";
-//import {ListGroup} from "react-bootstrap";
-//import AddFavorite from "../components/user/AddFavorite"
-//import {useSelector} from "react-redux";
-//import {AppState} from "../store/rootStore";
+import {Headline, Divider, List} from 'react-native-paper';
 import CreateReview from "./review/CreateReview";
-import {saveUser,getUser,removeUser} from "../asyncStorage"
 import AddFavorite from "./user/AddFavorite";
 import url from "../url"
-//import CreateReview from "../../src/components/review/CreateReview";
 
 const styles = StyleSheet.create({
     container: {
@@ -53,8 +41,6 @@ const Detailed = (props:any) => {
     const id  = props.book;
     const [book, setBook] = useState<any[]>([])
 
-
-    //const theme = useSelector((state:AppState) => state.themeReducer.theme)
 
     //Gets info about the selected book and all the reviews for the book
     useEffect(()=>{
